@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body>
 <h1>Dashboard customers</h1>
@@ -18,6 +19,9 @@
     <tbody>
     <tr th:each="customer : ${customers}">
         <td th:text="${customer.id}"></td>
+        <td th:text="${customer.name}"></td>
+        <td th:text="${customer.address}"></td>
+        <td th:text="${customer.mobile}"></td>
     </tr>
     </tbody>
 </table>

@@ -23,12 +23,16 @@ public class CustomerMapper extends AbstractMapper<Customer, CustomerDto> {
 
     @Override
     public Customer convertDtoToEntity(CustomerDto dto) {
-        if(dto == null){
+        if (dto == null) {
             return null;
         }
 
         Customer customer = new Customer();
-        customer.setId(Integer.valueOf(dto.getId()));
+
+        if (dto.getId() != null) {
+            customer.setId(Integer.valueOf(dto.getId()));
+        }
+
         customer.setName(dto.getName());
         customer.setAddress(dto.getAddress());
         customer.setMobile(dto.getMobile());
