@@ -29,16 +29,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/auth/signup")
-                .permitAll()
-                .anyRequest()
-                .authenticated()
+                    .antMatchers("/auth/signup")                    .permitAll()
+                    .anyRequest()                    .authenticated()
                 .and()
                 .formLogin()
-                .loginPage("/auth/signin")
-                .loginProcessingUrl("/auth/signin")
-                .failureUrl("/auth/signin?loginError")
-                .defaultSuccessUrl("/")
+                    .loginPage("/auth/signin")
+                    .loginProcessingUrl("/auth/signin")
+                    .failureUrl("/auth/signin?loginError")
+                    .defaultSuccessUrl("/")
                 .permitAll();
     }
 
