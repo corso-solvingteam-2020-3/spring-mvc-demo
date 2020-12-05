@@ -1,6 +1,7 @@
 package it.solvingteam.course.springmvc.springmvcdemo.web;
 
 import it.solvingteam.course.springmvc.springmvcdemo.dto.CustomerDto;
+import it.solvingteam.course.springmvc.springmvcdemo.dto.messages.CustomersSearchFilterDto;
 import it.solvingteam.course.springmvc.springmvcdemo.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,8 +19,10 @@ public class CustomerController {
     private CustomerService customerService;
 
     @GetMapping
-    public String list(Model model) {
-        List<CustomerDto> allCustomers = customerService.findAll();
+    public String list(CustomersSearchFilterDto customersSearchFilterDto, Model model) {
+        List<CustomerDto> allCustomers = customerService.findBySearchParameter(customersSearchFilterDto);
+
+        model.addAttribute("searchFilters", customersSearchFilterDto);
         model.addAttribute("customers", allCustomers);
 
         return "customer/list";

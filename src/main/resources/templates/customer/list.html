@@ -7,6 +7,15 @@
 </head>
 <body>
 <h1>Dashboard customers</h1>
+<div>
+    <form action="#" th:action="@{/customer}" th:object="${searchFilters}" method="get">
+        <p>ID: <input th:field="*{id}" type="text"></p>
+        <p>Name: <input th:field="*{name}" type="text"></p>
+        <p>Address: <input th:field="*{address}" type="text"></p>
+        <p>Mobile: <input th:field="*{mobile}" type="text"></p>
+        <p><input type="submit" value="Cerca"/></p>
+    </form>
+</div>
 <table>
     <thead>
     <tr>
