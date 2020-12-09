@@ -10,10 +10,10 @@ public class ControllerAdviceExceptionHandler {
 
     private final static Logger logger = LoggerFactory.getLogger(ControllerAdviceExceptionHandler.class);
 
-    @ExceptionHandler(Exception.class)
-    public String exceptionHandler(Exception e) {
-        logger.error("An error has occurred: ", e);
-        return "error";
-    }
+//    @ExceptionHandler(Exception.class)
+//    public String exceptionHandler(Exception e) {
+//        logger.error("An error has occurred: ", e);
+//        return "error";
+//    }
 
 }
