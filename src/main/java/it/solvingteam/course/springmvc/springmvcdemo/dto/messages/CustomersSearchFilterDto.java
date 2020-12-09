@@ -38,4 +38,5 @@ public class CustomersSearchFilterDto {
     public void setMobile(String mobile) {
         this.mobile = mobile;
     }
+  
 }

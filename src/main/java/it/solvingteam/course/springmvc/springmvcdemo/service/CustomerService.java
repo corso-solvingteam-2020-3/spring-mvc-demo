@@ -70,5 +70,21 @@ public class CustomerService {
     public long count() {
         return this.customerRepository.count();
     }
+    
+    public CustomerDto findById(int id) {
+    	CustomerDto customerDto = customerMapper.convertEntityToDto(customerRepository.findById(id).get());
+		return customerDto;
+    }
+    
+    public void update(CustomerDto customerDto) {
+    	Customer customer = customerMapper.convertDtoToEntity(customerDto);
+    	customerRepository.save(customer);
+    }
+    
+    public void delete(int id) {
+    	Customer customer = customerRepository.findById(id).get();
+    	customerRepository.delete(customer);
+    }
+    
 
 }

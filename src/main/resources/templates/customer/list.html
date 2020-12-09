@@ -31,8 +31,12 @@
         <td th:text="${customer.name}"></td>
         <td th:text="${customer.address}"></td>
         <td th:text="${customer.mobile}"></td>
+        <td><a th:href="@{/customer/show/{idToShow}(idToShow=${customer.id},id=${paramSearch.id},name=${paramSearch.name},address=${paramSearch.address},mobile=${paramSearch.mobile})}">Show</a></td>
+        <td><a th:href="@{/customer/prepareEdit/{id}(id=${customer.id})}">Edit</a></td>
+        <td><a th:href="@{/customer/prepareDelete/{id}(id=${customer.id})}">Delete</a></td>
     </tr>
     </tbody>
 </table>
+<p><a th:href="@{/customer/insert}">Inserisci Nuovo</a></p>
 </body>
 </html>
