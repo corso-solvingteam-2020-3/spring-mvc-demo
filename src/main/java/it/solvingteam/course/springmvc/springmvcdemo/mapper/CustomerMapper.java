@@ -1,6 +1,7 @@
 package it.solvingteam.course.springmvc.springmvcdemo.mapper;
 
 import it.solvingteam.course.springmvc.springmvcdemo.dto.CustomerDto;
+import it.solvingteam.course.springmvc.springmvcdemo.dto.messages.CustomerInsertDto;
 import it.solvingteam.course.springmvc.springmvcdemo.model.Customer;
 import org.springframework.stereotype.Component;
 
@@ -39,4 +40,7 @@ public class CustomerMapper extends AbstractMapper<Customer, CustomerDto> {
 
         return customer;
     }
+    
+
+    
 }

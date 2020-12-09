@@ -13,8 +13,12 @@
         <p>Name: <input th:field="*{name}" type="text"></p>
         <p>Address: <input th:field="*{address}" type="text"></p>
         <p>Mobile: <input th:field="*{mobile}" type="text"></p>
-        <p><input type="submit" value="Cerca"/></p>
+        <p>
+        <input type="submit" value="Cerca"/>
+        </p>
     </form>
+     <a th:href="@{/customer/insert}"> Inserisci </a>
+   
 </div>
 <table>
     <thead>
@@ -33,7 +37,7 @@
         <td th:text="${customer.address}"></td>
         <td th:text="${customer.mobile}"></td>
         <td>
-        <a th:href="@{/customer/insert}"> Inserisci </a>
+        <a th:href="@{/customer/{id}/show(id=${customer.id})}"> Show </a>
         </td>
     </tr>
     </tbody>

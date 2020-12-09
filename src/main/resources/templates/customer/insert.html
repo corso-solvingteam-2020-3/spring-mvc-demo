@@ -6,9 +6,9 @@
     <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body>
-<h1>Dashboard customers</h1>
+<h1>Insert customers</h1>
 <div>
-    <form action="#" th:action="@{/customer}" th:object="${insertCustomerDto}" method="post">       
+    <form action="#" th:action="@{/customer/executeInsert}" th:object="${insertCustomerDto}" method="post">       
         <p>Name: <input th:field="*{name}" type="text"></p>
         <p>Address: <input th:field="*{address}" type="text"></p>
         <p>Mobile: <input th:field="*{mobile}" type="text"></p>

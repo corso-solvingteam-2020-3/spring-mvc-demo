@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+<h1>Show Customer</h1>
+
+<div th:object="${customer}">
+
+<dl>
+<dt> Name: </dt>
+<dd th:text="*{name}">  </dd>
+</dl>
+<dl>
+<dt> Address: </dt>
+<dd th:text="*{address}">  </dd>
+</dl>
+<dl>
+<dt> Mobile: </dt>
+<dd th:text="*{mobile}">  </dd>
+</dl>
+
+</div>
+</body>
+</html>

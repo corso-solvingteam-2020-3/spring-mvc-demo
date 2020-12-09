@@ -1,6 +1,7 @@
 package it.solvingteam.course.springmvc.springmvcdemo.service;
 
 import it.solvingteam.course.springmvc.springmvcdemo.dto.CustomerDto;
+import it.solvingteam.course.springmvc.springmvcdemo.dto.messages.CustomerInsertDto;
 import it.solvingteam.course.springmvc.springmvcdemo.dto.messages.CustomersSearchFilterDto;
 import it.solvingteam.course.springmvc.springmvcdemo.mapper.CustomerMapper;
 import it.solvingteam.course.springmvc.springmvcdemo.model.Customer;
@@ -17,6 +18,7 @@ import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CustomerService {
@@ -66,9 +68,27 @@ public class CustomerService {
         Customer customer = customerMapper.convertDtoToEntity(customerDto);
         return this.customerRepository.save(customer);
     }
+    
+    public Customer save(CustomerInsertDto customerInsertDto) {
+    	String name = customerInsertDto.getName();
+		String address = customerInsertDto.getAddress();
+		String mobile = customerInsertDto.getMobile();
 
+		Customer customer = new Customer();
+
+		customer.setName(name);
+		customer.setAddress(address);
+		customer.setMobile(mobile);
+        return this.customerRepository.save(customer);
+    }
+    
+  
     public long count() {
         return this.customerRepository.count();
+    }
+    
+    public Optional<Customer> getCustomer(Integer id) {
+    	return this.customerRepository.findById(id);
     }
 
 }
