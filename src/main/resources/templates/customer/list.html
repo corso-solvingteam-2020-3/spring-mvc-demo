@@ -23,6 +23,7 @@
         <th>Name</th>
         <th>Address</th>
         <th>Mobile</th>
+        <th>Action</th>
     </tr>
     </thead>
     <tbody>
@@ -31,6 +32,9 @@
         <td th:text="${customer.name}"></td>
         <td th:text="${customer.address}"></td>
         <td th:text="${customer.mobile}"></td>
+        <td>
+        <a th:href="@{/customer/insert}"> Inserisci </a>
+        </td>
     </tr>
     </tbody>
 </table>

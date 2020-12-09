@@ -1,8 +1,10 @@
 package it.solvingteam.course.springmvc.springmvcdemo.web;
 
 import it.solvingteam.course.springmvc.springmvcdemo.dto.CustomerDto;
+import it.solvingteam.course.springmvc.springmvcdemo.dto.messages.CustomerInsertDto;
 import it.solvingteam.course.springmvc.springmvcdemo.dto.messages.CustomersSearchFilterDto;
 import it.solvingteam.course.springmvc.springmvcdemo.service.CustomerService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,6 +19,8 @@ public class CustomerController {
 
     @Autowired
     private CustomerService customerService;
+    
+ 
 
     @GetMapping
     public String list(CustomersSearchFilterDto customersSearchFilterDto, Model model) {
@@ -27,5 +31,10 @@ public class CustomerController {
 
         return "customer/list";
     }
-
+    
+    @GetMapping("insert")
+    public String insert(CustomerInsertDto customerInsertDto, Model model) {
+    	model.addAttribute("customerInsertDto", new CustomerInsertDto());
+    return "customer/insert";
+    }
 }
