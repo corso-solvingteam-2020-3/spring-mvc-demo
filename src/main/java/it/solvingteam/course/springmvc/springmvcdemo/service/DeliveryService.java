@@ -79,6 +79,11 @@ public class DeliveryService {
 		return deliveryMapper.convertEntityToDto(entityManager.createQuery(cq).getResultList());
 	}
 	
+	public Delivery save(DeliveryDto deliveryDto) {
+		Delivery delivery = deliveryMapper.convertDtoToEntity(deliveryDto);
+		return this.deliveryRepository.save(delivery);
+	}
+	
 	public Delivery save(DeliveryInsertDto deliveryInsertDto) {
 		String description = deliveryInsertDto.getDescription();
 		String price = deliveryInsertDto.getPrice();
@@ -98,6 +103,16 @@ public class DeliveryService {
 	
 	public Optional<Delivery> getDelivery(Integer id) {
 		return this.deliveryRepository.findById(id);
+	}
+	
+	public DeliveryDto getDeliveryById(Integer id) {
+		Optional<Delivery> deliveryOpt = this.deliveryRepository.findById(id);
+		Delivery delivery = deliveryOpt.get();
+		return deliveryMapper.convertEntityToDto(delivery);
+	}
+	
+	public void delete (Integer id) {
+		this.deliveryRepository.deleteById(id);
 	}
 
 }

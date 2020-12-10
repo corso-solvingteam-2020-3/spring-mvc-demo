@@ -6,7 +6,7 @@
     <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body>
-<h1>Insert customers</h1>
+<h1>Update customer</h1>
 <div>
     <form action="#" th:action="@{/customer/executeUpdate/{id}(id=${customerDto.id})}" th:object="${customerDto}" method="post">       
         <p>Name: <input th:field="*{name}" type="text"></p>

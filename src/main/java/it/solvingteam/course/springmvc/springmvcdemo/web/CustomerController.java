@@ -3,10 +3,8 @@ package it.solvingteam.course.springmvc.springmvcdemo.web;
 import it.solvingteam.course.springmvc.springmvcdemo.dto.CustomerDto;
 import it.solvingteam.course.springmvc.springmvcdemo.dto.messages.CustomerInsertDto;
 import it.solvingteam.course.springmvc.springmvcdemo.dto.messages.CustomersSearchFilterDto;
-import it.solvingteam.course.springmvc.springmvcdemo.mapper.CustomerMapper;
 import it.solvingteam.course.springmvc.springmvcdemo.model.Customer;
 import it.solvingteam.course.springmvc.springmvcdemo.service.CustomerService;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -40,7 +38,7 @@ public class CustomerController {
 	}
 
 	@GetMapping("insert")
-	public String insert( Model model) {
+	public String insert(Model model) {
 		model.addAttribute("insertCustomerDto", new CustomerInsertDto());
 		return "customer/insert";
 	}
@@ -55,18 +53,17 @@ public class CustomerController {
 			customerService.save(customerInsertDto);
 		return "redirect:/customer/";
 	}
-	
+
 	@GetMapping("update/{id}")
 	public String update(@PathVariable Integer id, Model model) {
-		CustomerDto customerDto = customerService.getCustomerById(id);	
+		CustomerDto customerDto = customerService.getCustomerById(id);
 		model.addAttribute("customerDto", customerDto);
 		return "customer/update";
 	}
-	
+
 	@PostMapping("executeUpdate/{id}")
 	public String executeUpdate(@Valid @ModelAttribute("customerDto") CustomerDto customerDto,
 			BindingResult bindingResult) {
-		
 
 		if (bindingResult.hasErrors()) {
 			return "customer/update";
@@ -74,22 +71,22 @@ public class CustomerController {
 			customerService.save(customerDto);
 		return "redirect:/customer/";
 	}
-	
+
 	@GetMapping("delete/{id}")
 	public String delete(@PathVariable Integer id, Model model) {
-		CustomerDto customerDto = customerService.getCustomerById(id);	
+		CustomerDto customerDto = customerService.getCustomerById(id);
 		model.addAttribute("customerDto", customerDto);
 		return "customer/delete";
 	}
-	
+
 	@GetMapping("executeDelete/{id}")
 	public String executedDelete(@PathVariable Integer id, Model model) {
 		customerService.delete(id);
 		return "redirect:/customer/";
 	}
-	
+
 	@GetMapping("show/{id}")
-	public String show (@PathVariable Integer id, Model model) {
+	public String show(@PathVariable Integer id, Model model) {
 		Optional<Customer> customer = customerService.getCustomer(id);
 		model.addAttribute("customer", customer.get());
 		return "customer/show";

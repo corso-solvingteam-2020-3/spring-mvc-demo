@@ -16,7 +16,6 @@ public class DeliveryDto {
 		@NotEmpty(message = "Required field")
 	    private String price;
 	    
-		@NotEmpty(message = "Required field")
 	    private CustomerDto customerDto;
 
 		public String getId() {

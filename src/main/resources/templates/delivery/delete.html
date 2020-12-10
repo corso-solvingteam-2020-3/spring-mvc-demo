@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+<h1>Delete Customer</h1>
+
+<div th:object="${deliveryDto}">
+
+<h2 th:text= "|Sei sicuro di voler cancellare l'ordine ${deliveryDto.description} ?|"></h2>
+
+<a th:href="@{/delivery/executeDelete/{id}(id=${deliveryDto.id})}"> Delete </a>
+<br>
+<a th:href="@{/delivery}"> Back </a>
+
+</div>
+</body>
+</html>
