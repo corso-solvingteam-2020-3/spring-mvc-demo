@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<h1>Dashboard deliveries</h1>
+<div>
+    <form action="#" th:action="@{/delivery}" th:object="${searchFilters}" method="get">
+        <p>ID: <input th:field="*{id}" type="text"></p>
+        <p>Description: <input th:field="*{description}" type="text"></p>
+        <p>Minimum Price: <input th:field="*{minPrice}" type="number" step="0.01"></p>
+        <p>Maximum Price: <input th:field="*{maxPrice}" type="number" step="0.01"></p>
+        <p>Shipping Date: <input th:field="*{shippingDate}" type="date"></p>
+        <p>Customer: 
+        	<select th:field="*{customerId}">
+        		<option th:value="${null}"/>
+       			<option th:each="customer : ${customers}" th:value="${customer.id}" th:text="${customer}"/>
+       		</select>
+    	</p>
+        <p><input type="submit" value="Search"/></p>
+    </form>
+</div>
+<div>
+	<a th:href="@{/delivery/insert}"><button>Insert new</button></a>
+</div>
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Description</th>
+        <th>Price</th>
+        <th>Shipping Date</th>
+        <th>Customer</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="delivery : ${deliveries}" th:object="${delivery}">
+        <td th:text="*{id}"></td>
+        <td th:text="*{description}"></td>
+        <td th:text="*{price}"></td>
+        <td th:text="*{shippingDate}"></td>
+        <td th:text="*{customer}"></td>
+        <td>
+        	<a th:href="@{/delivery/{id}/show(id=${delivery.id})}"><button th:href="@{/delivery/show}">Show</button></a>
+        	<a th:href="@{/delivery/{id}/update(id=${delivery.id})}"><button th:href="@{/delivery/update}">Update</button></a>
+        	<a th:href="@{/delivery/{id}/delete(id=${delivery.id})}"><button th:href="@{/delivery/delete}">Delete</button></a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<a th:href="@{/}"><button>Back</button></a>
+</body>
+</html>

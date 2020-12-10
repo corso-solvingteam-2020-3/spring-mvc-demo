@@ -1,0 +1,25 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Show Delivery</title>
+</head>
+<body>
+<h1>Show Delivery</h1>
+<div th:object="${deliveryModel}">
+
+ 	<p>Id: <input type="text" th:field="*{id}" readonly disabled/></p>
+    
+    <p>Description: <input type="text" th:field="*{description}" readonly disabled/></p>
+
+    <p>Price: <input type="number" th:field="*{price}" readonly disabled/></p>
+    
+    <p>Shipping Date: <input type="date" th:field="*{shippingDate}" readonly disabled/></p>
+    
+    <p>Customer: <input type="text" th:field="*{customer}" readonly disabled/></p>
+    
+   </div>
+   
+    <a th:href="@{/delivery/}"><button>Back</button></a>
+</body>
+</html>

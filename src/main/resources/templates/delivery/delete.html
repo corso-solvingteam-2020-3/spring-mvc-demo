@@ -1,0 +1,26 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Delete Delivery</title>
+</head>
+<body>
+<h1>Are you sure you want to delete the following delivery?</h1>
+<form action="#" th:object="${deliveryModel}" th:action="@{/delivery/{id}/delete(id=${deliveryModel.id})}" method="post" >
+
+ 	<p>Id: <input type="text" th:field="*{id}" readonly disabled/></p>
+    
+    <p>Description: <input type="text" th:field="*{description}" readonly disabled/></p>
+
+    <p>Price: <input type="number" th:field="*{price}" readonly disabled/></p>
+    
+    <p>Shipping Date: <input type="date" th:field="*{shippingDate}" readonly disabled/></p>
+    
+    <p>Customer: <input type="text" th:field="*{customer.name}" readonly disabled/></p>
+    
+   <p><input type="submit" value="Confirm Delete"/></p>
+</form>
+   
+    <a th:href="@{/delivery/}"><button>Back</button></a>
+</body>
+</html>

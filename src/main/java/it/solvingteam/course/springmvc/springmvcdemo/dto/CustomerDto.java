@@ -1,13 +1,19 @@
 package it.solvingteam.course.springmvc.springmvcdemo.dto;
 
+import javax.validation.constraints.NotEmpty;
+
 public class CustomerDto {
 
+	@NotEmpty(message = "Required field")
     private String id;
 
+    @NotEmpty(message = "Required field")
     private String name;
 
+    @NotEmpty(message = "Required field")
     private String mobile;
 
+    @NotEmpty(message = "Required field")
     private String address;
 
     public String getId() {
@@ -41,5 +47,10 @@ public class CustomerDto {
     public void setAddress(String address) {
         this.address = address;
     }
+    
+    @Override
+	public String toString() {
+		return id + ". " + name;
+	}
 
 }

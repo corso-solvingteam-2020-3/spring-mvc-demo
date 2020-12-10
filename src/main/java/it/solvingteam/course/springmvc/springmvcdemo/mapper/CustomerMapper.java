@@ -1,8 +1,10 @@
 package it.solvingteam.course.springmvc.springmvcdemo.mapper;
 
-import it.solvingteam.course.springmvc.springmvcdemo.dto.CustomerDto;
-import it.solvingteam.course.springmvc.springmvcdemo.model.Customer;
 import org.springframework.stereotype.Component;
+
+import it.solvingteam.course.springmvc.springmvcdemo.dto.CustomerDto;
+import it.solvingteam.course.springmvc.springmvcdemo.dto.messages.CustomerInsertDto;
+import it.solvingteam.course.springmvc.springmvcdemo.model.Customer;
 
 @Component
 public class CustomerMapper extends AbstractMapper<Customer, CustomerDto> {
@@ -38,5 +40,13 @@ public class CustomerMapper extends AbstractMapper<Customer, CustomerDto> {
         customer.setMobile(dto.getMobile());
 
         return customer;
+    }
+    
+    public CustomerDto convertToCustomerDto(CustomerInsertDto customerInsertDto) {
+    	CustomerDto customerDto = new CustomerDto();
+		customerDto.setName(customerInsertDto.getName());
+		customerDto.setAddress(customerInsertDto.getAddress());
+		customerDto.setMobile(customerInsertDto.getMobile());
+		return customerDto;
     }
 }

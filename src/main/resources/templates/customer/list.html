@@ -13,8 +13,11 @@
         <p>Name: <input th:field="*{name}" type="text"></p>
         <p>Address: <input th:field="*{address}" type="text"></p>
         <p>Mobile: <input th:field="*{mobile}" type="text"></p>
-        <p><input type="submit" value="Cerca"/></p>
+        <p><input type="submit" value="Search"/></p>
     </form>
+</div>
+<div>
+	<a th:href="@{/customer/insert}"><button>Insert new</button></a>
 </div>
 <table>
     <thead>
@@ -23,16 +26,23 @@
         <th>Name</th>
         <th>Address</th>
         <th>Mobile</th>
+        <th>Actions</th>
     </tr>
     </thead>
     <tbody>
-    <tr th:each="customer : ${customers}">
-        <td th:text="${customer.id}"></td>
-        <td th:text="${customer.name}"></td>
-        <td th:text="${customer.address}"></td>
-        <td th:text="${customer.mobile}"></td>
+    <tr th:each="customer : ${customers}" th:object="${customer}">
+        <td th:text="*{id}"></td>
+        <td th:text="*{name}"></td>
+        <td th:text="*{address}"></td>
+        <td th:text="*{mobile}"></td>
+        <td>
+        	<a th:href="@{/customer/{id}/show(id=${customer.id})}"><button th:href="@{/customer/show}">Show</button></a>
+        	<a th:href="@{/customer/{id}/update(id=${customer.id})}"><button th:href="@{/customer/update}">Update</button></a>
+        	<a th:href="@{/customer/{id}/delete(id=${customer.id})}"><button th:href="@{/customer/delete}">Delete</button></a>
+        </td>
     </tr>
     </tbody>
 </table>
+<a th:href="@{/}"><button>Back</button></a>
 </body>
 </html>

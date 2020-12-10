@@ -1,0 +1,31 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Insert Delivery</title>
+</head>
+<body>
+<h1>Insert Delivery</h1>
+<form action="#" th:action="@{/delivery/insert}" method="post" th:object="${deliveryInsertModel}">
+    <p>Description: <input type="text" th:field="*{description}"/></p>
+    <p style="color:red" th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></p>
+
+    <p>Price: <input type="number" step="0.01" th:field="*{price}"/></p>
+    <p style="color:red" th:if="${#fields.hasErrors('price')}" th:errors="*{price}"></p>
+    
+    <p>Shipping Date: <input type="date" th:field="*{shippingDate}"/></p>
+    <p style="color:red" th:if="${#fields.hasErrors('shippingDate')}" th:errors="*{shippingDate}"></p>
+    
+    <p>Customer: 
+        <select th:field="*{customerId}">
+        	<option th:value="${null}"/>
+       		<option th:each="customer : ${customers}" th:value="${customer.id}" th:text="${customer}"></option>
+        </select> 	
+    </p>
+    <p style="color:red" th:if="${#fields.hasErrors('customerId')}" th:errors="*{customerId}"></p>
+
+    <p><input type="submit" value="Submit"/></p>
+</form>
+    <a th:href="@{/delivery/}"><button>Back</button></a>
+</body>
+</html>
