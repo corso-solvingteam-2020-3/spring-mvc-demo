@@ -1,22 +1,23 @@
 package it.solvingteam.course.springmvc.springmvcdemo.service;
 
-import it.solvingteam.course.springmvc.springmvcdemo.dto.CustomerDto;
-import it.solvingteam.course.springmvc.springmvcdemo.dto.messages.CustomersSearchFilterDto;
-import it.solvingteam.course.springmvc.springmvcdemo.mapper.CustomerMapper;
-import it.solvingteam.course.springmvc.springmvcdemo.model.Customer;
-import it.solvingteam.course.springmvc.springmvcdemo.repository.CustomerRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Example;
-import org.springframework.data.domain.ExampleMatcher;
-import org.springframework.stereotype.Service;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
-import java.util.ArrayList;
-import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import it.solvingteam.course.springmvc.springmvcdemo.dto.CustomerDto;
+import it.solvingteam.course.springmvc.springmvcdemo.dto.messages.CustomerInsertDto;
+import it.solvingteam.course.springmvc.springmvcdemo.dto.messages.CustomersSearchFilterDto;
+import it.solvingteam.course.springmvc.springmvcdemo.mapper.CustomerMapper;
+import it.solvingteam.course.springmvc.springmvcdemo.model.Customer;
+import it.solvingteam.course.springmvc.springmvcdemo.repository.CustomerRepository;
 
 @Service
 public class CustomerService {
@@ -62,13 +63,39 @@ public class CustomerService {
         return customerMapper.convertEntityToDto(entityManager.createQuery(cq).getResultList());
     }
 
-    public Customer save(CustomerDto customerDto) {
-        Customer customer = customerMapper.convertDtoToEntity(customerDto);
+    public Customer insert(CustomerInsertDto customerinsertDto) {
+    	String id= customerinsertDto.getId();
+    	String name= customerinsertDto.getName();
+    	String mobile= customerinsertDto.getMobile();
+    	String address= customerinsertDto.getAddress();
+    	
+    	Customer customer = new Customer();
+    	if(id!=null) {
+    		customer.setId(Integer.parseInt(id));
+    	}
+    	customer.setName(name);
+    	customer.setMobile(mobile);
+    	customer.setAddress(address);
         return this.customerRepository.save(customer);
+    }
+    
+    public void delete(CustomerInsertDto customerinsertDto) {
+    	String id= customerinsertDto.getId();
+    	Customer customer=customerRepository.findById(Integer.parseInt(id)).orElse(null);
+        this.customerRepository.delete(customer);
     }
 
     public long count() {
         return this.customerRepository.count();
     }
 
+    public CustomerInsertDto getById(Integer id) {
+    	Customer c=this.customerRepository.findById(id).orElse(null);
+    	CustomerInsertDto cdto=new CustomerInsertDto();
+    	cdto.setId(c.getId().toString());
+    	cdto.setName(c.getName());
+    	cdto.setMobile(c.getMobile());
+    	cdto.setAddress(c.getAddress());
+    	return c==null?null:cdto;
+    }
 }

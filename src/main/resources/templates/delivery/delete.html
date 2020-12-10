@@ -1,0 +1,15 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Delete Delivery</title>
+</head>
+<body>
+<h1>Delete Delivery</h1>
+<form action="#" th:action="@{/delivery/delete/{id}(id=*{id})}" method="post" th:object="${deliveryDeleteModel}">
+
+    <p><input type="submit" value="Delete"/></p>
+    <a th:href="@{/delivery}">Back</a>
+</form>
+</body>
+</html>

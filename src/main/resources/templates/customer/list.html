@@ -31,7 +31,13 @@
         <td th:text="${customer.name}"></td>
         <td th:text="${customer.address}"></td>
         <td th:text="${customer.mobile}"></td>
+        
+        <td><a th:href="@{/customer/show/{id}(id=${customer.id})}">Show</a></td>
+        <td><a th:href="@{/customer/update/{id}(id=${customer.id})}">Update</a></td>
+        <td><a th:href="@{/customer/delete/{id}(id=${customer.id})}">Delete</a></td>
+
     </tr>
+    <a th:href="@{/}">Back</a>
     </tbody>
 </table>
 </body>

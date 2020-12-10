@@ -1,13 +1,13 @@
 package it.solvingteam.course.springmvc.springmvcdemo;
 
-import it.solvingteam.course.springmvc.springmvcdemo.dto.CustomerDto;
-import it.solvingteam.course.springmvc.springmvcdemo.model.Role;
-import it.solvingteam.course.springmvc.springmvcdemo.service.CustomerService;
-import it.solvingteam.course.springmvc.springmvcdemo.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
+
+import it.solvingteam.course.springmvc.springmvcdemo.model.Role;
+import it.solvingteam.course.springmvc.springmvcdemo.service.CustomerService;
+import it.solvingteam.course.springmvc.springmvcdemo.service.RoleService;
 
 @Component
 public class SpringMvcDemoApplicationRunner implements ApplicationRunner {
@@ -27,7 +27,7 @@ public class SpringMvcDemoApplicationRunner implements ApplicationRunner {
 
             roleService.save(role);
         }
-
+        /*
         if (customerService.count() == 0) {
             CustomerDto customerDto1 = new CustomerDto();
             customerDto1.setName("Customer 1");
@@ -41,7 +41,7 @@ public class SpringMvcDemoApplicationRunner implements ApplicationRunner {
 
             customerService.save(customerDto1);
             customerService.save(customerDto2);
-        }
+        }*/
 
     }
 

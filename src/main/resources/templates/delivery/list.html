@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<h1>Dashboard deliveries</h1>
+<div>
+    <form action="#" th:action="@{/delivery}" th:object="${searchFilters}" method="get">
+        <p>ID: <input th:field="*{id}" type="text"></p>
+        <p>Description: <input th:field="*{description}" type="text"></p>
+        <p>Shipping Date: <input th:field="*{shippingDate}" type="date"></p>
+        <p>Min price: <input th:field="*{minPrice}" type="number"></p>
+        <p>Max price: <input th:field="*{maxPrice}" type="number"></p>
+        <p>Customer: <select th:field="*{customerId}">
+    	<option value="" selected> -- </option>
+    	<option th:each="customer : ${customers}" th:value="${customer.id}" th:utext="${customer.name}"/>
+    	</select></p>
+        <p><input type="submit" value="Cerca"/></p>
+    </form>
+</div>
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Description</th>
+        <th>Shipping Date</th>
+        <th>Price</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="delivery : ${deliveries}">
+        <td th:text="${delivery.id}"></td>
+        <td th:text="${delivery.description}"></td>
+        <td th:text="${delivery.shippingDate}"></td>
+        <td th:text="${delivery.price}"></td>
+        
+        <td><a th:href="@{/delivery/show/{id}(id=${delivery.id})}">Show</a></td>
+        <td><a th:href="@{/delivery/update/{id}(id=${delivery.id})}">Update</a></td>
+        <td><a th:href="@{/delivery/delete/{id}(id=${delivery.id})}">Delete</a></td>
+
+    </tr>
+    <a th:href="@{/}">Back</a>
+    </tbody>
+</table>
+</body>
+</html>

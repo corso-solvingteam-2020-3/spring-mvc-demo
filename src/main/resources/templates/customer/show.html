@@ -1,0 +1,16 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Show Customer</title>
+</head>
+<body>
+<h1>Show Customer</h1>
+<tr>
+        Name: <td th:text="${customer.name}"></td><br>
+        Address: <td th:text="${customer.address}"></td> <br>
+        Mobile: <td th:text="${customer.mobile}"></td> <br>
+    <a th:href="@{/customer}">Back</a>
+</tr>
+</body>
+</html>
