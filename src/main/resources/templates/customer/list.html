@@ -10,7 +10,6 @@
 <h1>Dashboard customers</h1>
 <div>
     <form action="#" th:action="@{/customer}" th:object="${searchFilters}" method="get">
-        <p>ID: <input th:field="*{id}" type="text"></p>
         <p>Name: <input th:field="*{name}" type="text"></p>
         <p>Address: <input th:field="*{address}" type="text"></p>
         <p>Mobile: <input th:field="*{mobile}" type="text"></p>
@@ -21,7 +20,6 @@
 <table>
     <thead>
     <tr>
-        <th>ID</th>
         <th>Name</th>
         <th>Address</th>
         <th>Mobile</th>
@@ -29,7 +27,6 @@
     </thead>
     <tbody>
     <tr th:each="customer : ${customers}" th:object="${customer}">
-        <td th:text="*{id}"></td>
         <td th:text="*{name}"></td>
         <td th:text="*{address}"></td>
         <td th:text="*{mobile}"></td>

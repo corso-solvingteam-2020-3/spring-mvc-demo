@@ -59,19 +59,21 @@ public class DeliveryService {
         }
 
         if (deliverySearchFilterDto.getPrice() != null && !deliverySearchFilterDto.getPrice().equals("")) {
-            predicates.add(cb.greaterThan(delivery.get("price"), "%" + deliverySearchFilterDto.getPrice() + "%"));
+            predicates.add(cb.greaterThanOrEqualTo(delivery.get("price"), deliverySearchFilterDto.getPrice()));
         }
         
         if (deliverySearchFilterDto.getPrice() != null && !deliverySearchFilterDto.getPrice().equals("")) {
-            predicates.add(cb.lessThan(delivery.get("price"), "%" + deliverySearchFilterDto.getPrice() + "%"));
+            predicates.add(cb.lessThanOrEqualTo(delivery.get("price"), deliverySearchFilterDto.getPrice()));
         }
 
         if (deliverySearchFilterDto.getShippingDate() != null && !deliverySearchFilterDto.getShippingDate().equals("")) {
-            predicates.add(cb.like(delivery.get("shippingDate"), "%" + deliverySearchFilterDto.getShippingDate() + "%"));
+            predicates.add(cb.equal(delivery.get("shippingDate"), LocalDate.parse(deliverySearchFilterDto.getShippingDate())));
         }
         
         if (deliverySearchFilterDto.getCustomer() != null && !deliverySearchFilterDto.getCustomer().equals("")) {
-        	predicates.add(cb.like(delivery.get("customer").as(String.class), "%" + deliverySearchFilterDto.getCustomer() + "%"));
+        	Customer customer = new Customer();
+            customer.setId(Integer.parseInt(deliverySearchFilterDto.getCustomer()));
+        	predicates.add(cb.equal(delivery.get("customer"), customer));
         }
 
         cq.where(predicates.toArray(new Predicate[0]));

@@ -10,13 +10,14 @@
 <h1>Dashboard deliveries</h1>
 <div>
     <form action="#" th:action="@{/delivery}" th:object="${searchFilters}" method="get">
-        <p>ID: <input th:field="*{id}" type="text"></p>
         <p>Description: <input th:field="*{description}" type="text"></p>
         <p>Shipping Date: <input th:field="*{shippingDate}" type="date"></p>
         <p>Price: <input th:field="*{price}" type="number"></p>
-        <select th:field="${customersDelivery}">
-    	<option th:each="customer : ${customersDelivery}" th:value="${customer.id}" th:text="${customer.name}"> - Select Customer - </option>
-    	</select>
+        <p>Customer: 
+        <select th:field="*{customer}">
+        <option value=""> Select Customer </option>
+    	<option th:each="customer : ${customersDelivery}" th:value="${customer.id}" th:text="${customer.name}">
+    	</select></p>
         <p><input type="submit" value="Cerca"/></p> <p><a th:href="@{/delivery/insert}">Inserisci Nuovo</a></p>
        
     </form>
@@ -24,7 +25,6 @@
 <table>
     <thead>
     <tr>
-        <th>ID</th>
         <th>Description</th>
         <th>Shipping Date</th>
         <th>Price</th>
@@ -33,7 +33,6 @@
     </thead>
     <tbody>
     <tr th:each="delivery : ${deliveries}" th:object="${delivery}">
-        <td th:text="*{id}"></td>
         <td th:text="*{description}"></td>
         <td th:text="*{shippingDate}"></td>
         <td th:text="*{price}"></td>
