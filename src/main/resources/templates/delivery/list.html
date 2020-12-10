@@ -39,12 +39,10 @@
         <td th:text="${delivery.description}"></td>
         <td th:text="${delivery.shippingDate}"></td>
         <td th:text="${delivery.price}"></td>
-        <td th:text="${delivery.customer.id}"></td>
-        <!--  
-        <td><a th:href="@{/delivery/show/{idToShow}(idToShow=${customer.id},id=${paramSearch.id},name=${paramSearch.name},address=${paramSearch.address},mobile=${paramSearch.mobile})}">Show</a></td>
-        <td><a th:href="@{/delivery/prepareEdit/{id}(id=${customer.id})}">Edit</a></td>
-        <td><a th:href="@{/delivery/prepareDelete/{id}(id=${customer.id})}">Delete</a></td>
-        -->
+        <td th:text="${delivery.customer.id}"></td> 
+        <td><a th:href="@{/delivery/show/{idToShow}(idToShow=${delivery.id})}">Show</a></td>
+        <td><a th:href="@{/delivery/prepareEdit/{id}(id=${delivery.id})}">Edit</a></td>
+        <td><a th:href="@{/delivery/prepareDelete/{id}(id=${delivery.id})}">Delete</a></td>
     </tr>
     </tbody>
 </table>

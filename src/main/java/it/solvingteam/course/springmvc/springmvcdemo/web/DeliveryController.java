@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -18,6 +19,7 @@ import it.solvingteam.course.springmvc.springmvcdemo.dto.DeliveryDto;
 import it.solvingteam.course.springmvc.springmvcdemo.dto.DeliveryDtoForInsert;
 import it.solvingteam.course.springmvc.springmvcdemo.dto.DeliverySearchFilterDto;
 import it.solvingteam.course.springmvc.springmvcdemo.dto.messages.CustomerInsertDto;
+import it.solvingteam.course.springmvc.springmvcdemo.dto.messages.CustomersSearchFilterDto;
 import it.solvingteam.course.springmvc.springmvcdemo.exceptions.RoleNotFoundException;
 import it.solvingteam.course.springmvc.springmvcdemo.model.Customer;
 import it.solvingteam.course.springmvc.springmvcdemo.service.CustomerService;
@@ -86,6 +88,22 @@ public class DeliveryController {
         	deliveryService.insert(deliveryDaInserire);
             return "redirect:/delivery/";
         }
+    }
+    
+    /*
+     * --------------------- VISUALIZZA DELIVERY -----------------------
+     * 
+     */
+    
+    @GetMapping("show/{idToShow}")
+    public String show(@PathVariable Integer idToShow, Model model) {
+    	
+    	DeliveryDto deliveryDaVisualizzare = deliveryService.findById(idToShow);
+    	
+    	model.addAttribute("deliveryToShow", deliveryDaVisualizzare);
+    	
+		return "/delivery/show";
+    	
     }
 	
 }
