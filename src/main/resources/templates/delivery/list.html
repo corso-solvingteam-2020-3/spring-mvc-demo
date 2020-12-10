@@ -11,8 +11,9 @@
     <form action="#" th:action="@{/delivery}" th:object="${searchFilters}" method="get">
         <p>ID: <input th:field="*{id}" type="text"></p>
         <p>Description: <input th:field="*{description}" type="text"></p>
-        <p>Shipping Date: <input th:field="*{shippingDate}" type="text"></p>
-        <p>Price: <input th:field="*{price}" type="text"></p>
+        <p>Shipping Date: <input th:field="*{shippingDate}" type="date"></p>
+        <p>Minimum Price: <input th:field="*{minimunPrice}" type="number" step="0.01"></p>
+        <p>Maximum Price: <input th:field="*{maximunPrice}" type="number" step="0.01"></p>
         <p>Customer: 
         	<select th:field="*{customerId}">
         		<option th:each="customer : ${customers}" th:value="${customer.id}" th:text="${customer.name}"></option>

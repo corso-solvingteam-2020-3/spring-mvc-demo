@@ -81,11 +81,15 @@ public class DeliveryService {
         }
 
         if (deliverySearchFilterDto.getShippingDate() != null && !deliverySearchFilterDto.getShippingDate().equals("")) {
-            predicates.add(cb.like(delivery.get("shipping_date"), "%" + deliverySearchFilterDto.getShippingDate() + "%"));
+            predicates.add(cb.like(delivery.get("shippingDate").as(String.class), deliverySearchFilterDto.getShippingDate()));
         }
 
-        if (deliverySearchFilterDto.getPrice() != null && !deliverySearchFilterDto.getPrice().equals("")) {
-            predicates.add(cb.like(delivery.get("price"), "%" + deliverySearchFilterDto.getPrice() + "%"));
+        if (deliverySearchFilterDto.getMinimunPrice() != null && !deliverySearchFilterDto.getMinimunPrice().equals("")) {
+            predicates.add(cb.greaterThanOrEqualTo(delivery.get("price"), deliverySearchFilterDto.getMinimunPrice()));
+        }
+        
+        if (deliverySearchFilterDto.getMaximunPrice() != null && !deliverySearchFilterDto.getMaximunPrice().equals("")) {
+            predicates.add(cb.lessThanOrEqualTo(delivery.get("price"), deliverySearchFilterDto.getMaximunPrice()));
         }
         
         if (deliverySearchFilterDto.getCustomerId() != null && !deliverySearchFilterDto.getCustomerId().equals("")) {

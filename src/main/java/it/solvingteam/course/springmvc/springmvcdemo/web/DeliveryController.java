@@ -143,5 +143,33 @@ public class DeliveryController {
         }
     	
     }
+    
+    /*
+     * -------------------- ELIMINAZIONE DI UNA DELIVERY --------------------------
+     * 
+     */
+    
+    @GetMapping("prepareDelete/{id}")
+    public String prepareDelete(@PathVariable Integer id, Model model) {
+    	
+		DeliveryDto deliveryDaEliminare = new DeliveryDto();
+		
+		deliveryDaEliminare.setId(Integer.toString(id));
+
+		model.addAttribute("deliveryToDelete", deliveryDaEliminare);
+
+		return "delivery/deleteDelivery";
+    	
+    }
+    
+    @GetMapping("delete/{id}")
+    public String DeleteDelivery(@PathVariable Integer id, Model model) {
+    	
+		deliveryService.delete(id);
+
+		return "redirect:/delivery/";
+    	
+    }
+
 	
 }

@@ -5,7 +5,8 @@ public class DeliverySearchFilterDto {
 	private String id;
 	private String description;
 	private String shippingDate;
-	private String price;
+	private String minimunPrice;
+	private String maximunPrice;
 	private String customerId;
 	
 	
@@ -27,11 +28,17 @@ public class DeliverySearchFilterDto {
 	public void setShippingDate(String shippingDate) {
 		this.shippingDate = shippingDate;
 	}
-	public String getPrice() {
-		return price;
+	public String getMinimunPrice() {
+		return minimunPrice;
 	}
-	public void setPrice(String price) {
-		this.price = price;
+	public void setMinimunPrice(String minimunPrice) {
+		this.minimunPrice = minimunPrice;
+	}
+	public String getMaximunPrice() {
+		return maximunPrice;
+	}
+	public void setMaximunPrice(String maximunPrice) {
+		this.maximunPrice = maximunPrice;
 	}
 	public String getCustomerId() {
 		return customerId;

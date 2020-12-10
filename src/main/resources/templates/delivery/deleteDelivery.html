@@ -1,0 +1,13 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Delete Delivery</title>
+</head>
+<body>
+	
+	<p><a th:href="@{/delivery/delete/{id}(id=${deliveryToDelete.id})}"><button>Delete</button></a></p>
+	<p><a th:href="@{/delivery/}"><button>Cancel</button></a></p>
+	
+</body>
+</html>
