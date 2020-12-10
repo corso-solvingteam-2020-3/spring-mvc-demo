@@ -13,13 +13,12 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import it.solvingteam.course.springmvc.springmvcdemo.dto.messages.CustomerDto;
-import it.solvingteam.course.springmvc.springmvcdemo.dto.messages.CustomersSearchFilterDto;
 import it.solvingteam.course.springmvc.springmvcdemo.dto.messages.CustomerInsertMessageDto;
-import it.solvingteam.course.springmvc.springmvcdemo.model.Customer;
+import it.solvingteam.course.springmvc.springmvcdemo.dto.messages.CustomersSearchFilterDto;
 import it.solvingteam.course.springmvc.springmvcdemo.service.CustomerService;
-//import it.solvingteam.course.springmvc.springmvcdemo.web.validators.CustomerInsertMessageValidator;
 
 @Controller
 @RequestMapping("customer")
@@ -27,8 +26,6 @@ public class CustomerController {
 
 	@Autowired
 	private CustomerService customerService;
-//    @Autowired
-//    private CustomerInsertMessageValidator customerInsertMessageValidator;
 
 	@GetMapping
 	public String list(CustomersSearchFilterDto customersSearchFilterDto, Model model) {
@@ -83,7 +80,6 @@ public class CustomerController {
 		} else {
 			return "redirect:/customer";
 		}
-
 	}
 
 	@PostMapping("executeUpdate")
@@ -99,30 +95,20 @@ public class CustomerController {
 	}
 
 	@GetMapping("delete/{id}")
-	public String delete(@PathVariable Integer id,
-			@Valid @ModelAttribute("customerDeleteModel") CustomerDto customerDto, BindingResult bindingResult,
-			Model model) {
+	public String delete(@PathVariable Integer id, Model model) {
 
-		if (id != null || !bindingResult.hasErrors()) {
-			CustomerDto customerDtoDelete = customerService.customerEntityToCustomerDto(id);
-			model.addAttribute("customerDeleteModel", customerDtoDelete);
+		if (id != null) {
+			model.addAttribute("idCustomerDelete", id);
 			return "customer/delete";
 
 		} else {
 			return "redirect:/customer";
 		}
-
 	}
 
-	@PostMapping("executeDelete")
-	public String executeDelete(@Valid @ModelAttribute("customerDeleteModel") CustomerDto customerDto,
-			BindingResult bindingResult) {
-
-		if (bindingResult.hasErrors()) {
-			return "customer/delete";
-		} else {
-			customerService.delete(customerDto);
-			return "redirect:/customer";
-		}
+	@GetMapping("executeDelete")
+	public String executeDelete(@RequestParam("idCustomerDelete") Integer id) {
+		customerService.delete(id);
+		return "redirect:/customer";
 	}
 }

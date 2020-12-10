@@ -14,15 +14,17 @@
 	
 				<div class='card-body'>
 	
-					<form action="#" th:action="@{/customer/executeDelete}" method="post" th:object="${customerDeleteModel}">
+					<!-- <form action="#" th:action="@{/customer/executeDelete}" method="post"> -->
 
 						<div class="form-row">
 							<div class="form-group col-md-6">	
 								<a th:href="@{/customer}">Annulla</a>	
 							</div>
 							
-							<!-- <input type="hidden" th:object="${customerDeleteModel}"> -->
-							<input type="hidden" th:field="*{id}">
+							<a th:href="@{/customer/executeDelete/(idCustomerDelete=${idCustomerDelete})}">Conferma</a>
+							
+							<!-- <input type="hidden" id="idCustomer" name="id" value="${idCustomerDelete}"> -->
+							<!-- <input type="hidden" th:field="*{id}">
 							<p style="color:red" th:if="${#fields.hasErrors('id')}" th:errors="*{id}"></p>
 							
 							<input type="hidden" th:field="*{name}"/>
@@ -32,12 +34,12 @@
 						    <p style="color:red" th:if="${#fields.hasErrors('mobile')}" th:errors="*{mobile}"></p>
 						
 						    <input type="hidden" th:field="*{address}"/>
-						    <p style="color:red" th:if="${#fields.hasErrors('address')}" th:errors="*{address}"></p>
+						    <p style="color:red" th:if="${#fields.hasErrors('address')}" th:errors="*{address}"></p>-->
 							
-							<p><input type="submit" value="Conferma"/></p>
+							<!-- <p><input type="submit" value="Conferma"/></p>  -->
 	
 						</div>
-					</form>
+					<!-- </form> -->
 					<!-- end card-body -->
 				</div>
 		</div>

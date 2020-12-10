@@ -103,8 +103,8 @@ public class CustomerService {
 		 this.customerRepository.save(customer);
 	}
 	
-	public void delete(CustomerDto customerDto) {
-		Customer customer = customerMapper.convertDtoToEntity(customerDto);
+	public void delete(Integer id) {
+		Customer customer = this.findById(id).orElse(null);
 		 this.customerRepository.delete(customer);
 	}
     
