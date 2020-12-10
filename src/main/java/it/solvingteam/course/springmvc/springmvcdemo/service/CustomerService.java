@@ -23,54 +23,54 @@ import java.util.Optional;
 @Service
 public class CustomerService {
 
-    @Autowired
-    private CustomerRepository customerRepository;
+	@Autowired
+	private CustomerRepository customerRepository;
 
-    @Autowired
-    private CustomerMapper customerMapper;
+	@Autowired
+	private CustomerMapper customerMapper;
 
-    @Autowired
-    private EntityManager entityManager;
+	@Autowired
+	private EntityManager entityManager;
 
-    public List<CustomerDto> findAll() {
-        List<Customer> allCustomers = this.customerRepository.findAll();
-        return customerMapper.convertEntityToDto(allCustomers);
-    }
+	public List<CustomerDto> findAll() {
+		List<Customer> allCustomers = this.customerRepository.findAll();
+		return customerMapper.convertEntityToDto(allCustomers);
+	}
 
-    public List<CustomerDto> findBySearchParameter(CustomersSearchFilterDto customersSearchFilterDto) {
-        CriteriaBuilder cb = entityManager.getCriteriaBuilder();
-        CriteriaQuery<Customer> cq = cb.createQuery(Customer.class);
+	public List<CustomerDto> findBySearchParameter(CustomersSearchFilterDto customersSearchFilterDto) {
+		CriteriaBuilder cb = entityManager.getCriteriaBuilder();
+		CriteriaQuery<Customer> cq = cb.createQuery(Customer.class);
 
-        Root<Customer> customer = cq.from(Customer.class);
-        List<Predicate> predicates = new ArrayList<>();
+		Root<Customer> customer = cq.from(Customer.class);
+		List<Predicate> predicates = new ArrayList<>();
 
-        if (customersSearchFilterDto.getId() != null && !customersSearchFilterDto.getId().equals("")) {
-            predicates.add(cb.like(customer.get("id").as(String.class), "%" + customersSearchFilterDto.getId() + "%"));
-        }
+		if (customersSearchFilterDto.getId() != null && !customersSearchFilterDto.getId().equals("")) {
+			predicates.add(cb.like(customer.get("id").as(String.class), "%" + customersSearchFilterDto.getId() + "%"));
+		}
 
-        if (customersSearchFilterDto.getName() != null && !customersSearchFilterDto.getName().equals("")) {
-            predicates.add(cb.like(customer.get("name"), "%" + customersSearchFilterDto.getName() + "%"));
-        }
+		if (customersSearchFilterDto.getName() != null && !customersSearchFilterDto.getName().equals("")) {
+			predicates.add(cb.like(customer.get("name"), "%" + customersSearchFilterDto.getName() + "%"));
+		}
 
-        if (customersSearchFilterDto.getAddress() != null && !customersSearchFilterDto.getAddress().equals("")) {
-            predicates.add(cb.like(customer.get("address"), "%" + customersSearchFilterDto.getAddress() + "%"));
-        }
+		if (customersSearchFilterDto.getAddress() != null && !customersSearchFilterDto.getAddress().equals("")) {
+			predicates.add(cb.like(customer.get("address"), "%" + customersSearchFilterDto.getAddress() + "%"));
+		}
 
-        if (customersSearchFilterDto.getMobile() != null && !customersSearchFilterDto.getMobile().equals("")) {
-            predicates.add(cb.like(customer.get("mobile"), "%" + customersSearchFilterDto.getMobile() + "%"));
-        }
+		if (customersSearchFilterDto.getMobile() != null && !customersSearchFilterDto.getMobile().equals("")) {
+			predicates.add(cb.like(customer.get("mobile"), "%" + customersSearchFilterDto.getMobile() + "%"));
+		}
 
-        cq.where(predicates.toArray(new Predicate[0]));
-        return customerMapper.convertEntityToDto(entityManager.createQuery(cq).getResultList());
-    }
+		cq.where(predicates.toArray(new Predicate[0]));
+		return customerMapper.convertEntityToDto(entityManager.createQuery(cq).getResultList());
+	}
 
-    public Customer save(CustomerDto customerDto) {
-        Customer customer = customerMapper.convertDtoToEntity(customerDto);
-        return this.customerRepository.save(customer);
-    }
-    
-    public Customer save(CustomerInsertDto customerInsertDto) {
-    	String name = customerInsertDto.getName();
+	public Customer save(CustomerDto customerDto) {
+		Customer customer = customerMapper.convertDtoToEntity(customerDto);
+		return this.customerRepository.save(customer);
+	}
+
+	public Customer save(CustomerInsertDto customerInsertDto) {
+		String name = customerInsertDto.getName();
 		String address = customerInsertDto.getAddress();
 		String mobile = customerInsertDto.getMobile();
 
@@ -79,16 +79,24 @@ public class CustomerService {
 		customer.setName(name);
 		customer.setAddress(address);
 		customer.setMobile(mobile);
-        return this.customerRepository.save(customer);
-    }
-    
-  
-    public long count() {
-        return this.customerRepository.count();
-    }
-    
-    public Optional<Customer> getCustomer(Integer id) {
-    	return this.customerRepository.findById(id);
-    }
+		return this.customerRepository.save(customer);
+	}
 
+	public long count() {
+		return this.customerRepository.count();
+	}
+
+	public Optional<Customer> getCustomer(Integer id) {
+		return this.customerRepository.findById(id);
+	}
+
+	public CustomerDto getCustomerById(Integer id) {
+		Optional<Customer> customerOpt = this.customerRepository.findById(id);
+		Customer customer = customerOpt.get();
+		return customerMapper.convertEntityToDto(customer);
+	}
+	
+	public void delete (Integer id) {
+		this.customerRepository.deleteById(id);
+	}
 }

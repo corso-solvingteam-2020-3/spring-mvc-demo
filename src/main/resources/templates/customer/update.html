@@ -8,14 +8,14 @@
 <body>
 <h1>Insert customers</h1>
 <div>
-    <form action="#" th:action="@{/customer/executeInsert}" th:object="${insertCustomerDto}" method="post">       
+    <form action="#" th:action="@{/customer/executeUpdate/{id}(id=${customerDto.id})}" th:object="${customerDto}" method="post">       
         <p>Name: <input th:field="*{name}" type="text"></p>
         <p style="color:red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></p>
         <p>Address: <input th:field="*{address}" type="text"></p>
         <p style="color:red" th:if="${#fields.hasErrors('address')}" th:errors="*{address}"></p>
         <p>Mobile: <input th:field="*{mobile}" type="text"></p>
         <p style="color:red" th:if="${#fields.hasErrors('mobile')}" th:errors="*{mobile}"></p>
-        <p><input type="submit" value="Inserisci"/></p>
+        <p><input type="submit" value="Aggiorna"/></p>
     </form>
 </div>
 

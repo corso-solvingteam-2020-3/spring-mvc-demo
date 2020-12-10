@@ -7,23 +7,14 @@
 </head>
 <body>
 
-<h1>Show Customer</h1>
+<h1>Delete Customer</h1>
 
-<div th:object="${customer}">
+<div th:object="${customerDto}">
 
-<dl>
-<dt> Name: </dt>
-<dd th:text="*{name}">  </dd> 
-</dl>
-<dl>
-<dt> Address: </dt>
-<dd th:text="*{address}">  </dd>
-</dl>
-<dl>
-<dt> Mobile: </dt>
-<dd th:text="*{mobile}">  </dd>
-</dl>
+<h2 th:text= "|Sei sicuro di voler cancellare ${customerDto.name} ?|"></h2>
 
+<a th:href="@{/customer/executeDelete/{id}(id=${customerDto.id})}"> Delete </a>
+<br>
 <a th:href="@{/customer}"> Back </a>
 
 </div>

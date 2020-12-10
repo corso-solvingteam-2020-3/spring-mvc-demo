@@ -1,9 +1,15 @@
 package it.solvingteam.course.springmvc.springmvcdemo.model;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+
 
 @Entity
 public class Customer {
@@ -17,6 +23,9 @@ public class Customer {
     private String mobile;
 
     private String address;
+    
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "customer")
+	private Set <Delivery> delivery = new HashSet<>();
 
     public Integer getId() {
         return id;
