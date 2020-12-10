@@ -6,6 +6,7 @@
     <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body>
+<p><a th:href="@{/}">Indietro</a></p>
 <h1>Dashboard customers</h1>
 <div>
     <form action="#" th:action="@{/customer}" th:object="${searchFilters}" method="get">
@@ -13,7 +14,8 @@
         <p>Name: <input th:field="*{name}" type="text"></p>
         <p>Address: <input th:field="*{address}" type="text"></p>
         <p>Mobile: <input th:field="*{mobile}" type="text"></p>
-        <p><input type="submit" value="Cerca"/></p>
+        <p><input type="submit" value="Cerca"/></p> <p><a th:href="@{/customer/insert}">Inserisci Nuovo</a></p>
+       
     </form>
 </div>
 <table>
@@ -26,11 +28,17 @@
     </tr>
     </thead>
     <tbody>
-    <tr th:each="customer : ${customers}">
-        <td th:text="${customer.id}"></td>
-        <td th:text="${customer.name}"></td>
-        <td th:text="${customer.address}"></td>
-        <td th:text="${customer.mobile}"></td>
+    <tr th:each="customer : ${customers}" th:object="${customer}">
+        <td th:text="*{id}"></td>
+        <td th:text="*{name}"></td>
+        <td th:text="*{address}"></td>
+        <td th:text="*{mobile}"></td>
+        
+        <td>
+        <a th:href="@{/customer/show/{customerId}(customerId=*{id})}">Visualizza</a>
+        <a th:href="@{/customer/update/{customerId}(customerId=*{id})}">Modifica</a>
+        <a th:href="@{/customer/delete/{customerId}(customerId=*{id})}">Elimina</a>
+        </td>
     </tr>
     </tbody>
 </table>

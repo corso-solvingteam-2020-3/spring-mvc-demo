@@ -1,22 +1,24 @@
 package it.solvingteam.course.springmvc.springmvcdemo.service;
 
-import it.solvingteam.course.springmvc.springmvcdemo.dto.CustomerDto;
-import it.solvingteam.course.springmvc.springmvcdemo.dto.messages.CustomersSearchFilterDto;
-import it.solvingteam.course.springmvc.springmvcdemo.mapper.CustomerMapper;
-import it.solvingteam.course.springmvc.springmvcdemo.model.Customer;
-import it.solvingteam.course.springmvc.springmvcdemo.repository.CustomerRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Example;
-import org.springframework.data.domain.ExampleMatcher;
-import org.springframework.stereotype.Service;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
-import java.util.ArrayList;
-import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import it.solvingteam.course.springmvc.springmvcdemo.dto.messages.CustomerDto;
+import it.solvingteam.course.springmvc.springmvcdemo.dto.messages.CustomersSearchFilterDto;
+import it.solvingteam.course.springmvc.springmvcdemo.dto.messages.CustomerInsertMessageDto;
+import it.solvingteam.course.springmvc.springmvcdemo.mapper.CustomerMapper;
+import it.solvingteam.course.springmvc.springmvcdemo.model.Customer;
+import it.solvingteam.course.springmvc.springmvcdemo.repository.CustomerRepository;
 
 @Service
 public class CustomerService {
@@ -70,5 +72,42 @@ public class CustomerService {
     public long count() {
         return this.customerRepository.count();
     }
+    
+    public Customer insert(CustomerInsertMessageDto insertCustomerMessageDto) {
+    	String name = insertCustomerMessageDto.getName();
+    	String mobile = insertCustomerMessageDto.getMobile();
+    	String address = insertCustomerMessageDto.getAddress();
+    	
+    	Customer customer = new Customer();
+    	customer.setName(name);
+    	customer.setMobile(mobile);
+    	customer.setAddress(address);
+    	return this.customerRepository.save(customer);
+    }
 
+    public Optional<Customer> findById(Integer id) {
+    	return this.customerRepository.findById(id);
+    }
+    
+    public CustomerDto customerEntityToCustomerDto(Integer id) {
+    	Customer customer = this.findById(id).orElse(null);
+    	return customerMapper.convertEntityToDto(customer);
+    }
+    
+    public Customer customerDtoToCustomerEntity(CustomerDto customerDto) {
+    	return customerMapper.convertDtoToEntity(customerDto);
+    }
+
+	public void update(CustomerDto customerDto) {
+		 Customer customer = customerMapper.convertDtoToEntity(customerDto);
+		 this.customerRepository.save(customer);
+	}
+	
+	public void delete(CustomerDto customerDto) {
+		Customer customer = customerMapper.convertDtoToEntity(customerDto);
+		 this.customerRepository.delete(customer);
+	}
+    
+	
+	
 }

@@ -1,13 +1,20 @@
-package it.solvingteam.course.springmvc.springmvcdemo.dto;
+package it.solvingteam.course.springmvc.springmvcdemo.dto.messages;
+
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 public class CustomerDto {
 
+	@NotNull(message = "The id Customer Id doesn't exist")
     private String id;
-
+	
+	@NotEmpty(message = "The name is required")
     private String name;
 
+	@NotEmpty(message = "Il number is required")
     private String mobile;
 
+	@NotEmpty(message = "The address is required")
     private String address;
 
     public String getId() {

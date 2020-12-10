@@ -1,6 +1,6 @@
 package it.solvingteam.course.springmvc.springmvcdemo;
 
-import it.solvingteam.course.springmvc.springmvcdemo.dto.CustomerDto;
+import it.solvingteam.course.springmvc.springmvcdemo.dto.messages.CustomerDto;
 import it.solvingteam.course.springmvc.springmvcdemo.model.Role;
 import it.solvingteam.course.springmvc.springmvcdemo.service.CustomerService;
 import it.solvingteam.course.springmvc.springmvcdemo.service.RoleService;
