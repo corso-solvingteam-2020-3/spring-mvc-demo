@@ -67,7 +67,7 @@ public class DeliveryService {
 		}
 
 		if (deliverySearchFilterDto.getShippingDate() != null && !deliverySearchFilterDto.getShippingDate().equals("")) {
-			predicates.add(cb.equal(delivery.get("shippingDate"),  deliverySearchFilterDto.getShippingDate() ));
+			predicates.add(cb.equal(delivery.get("shippingDate"), LocalDate.parse(deliverySearchFilterDto.getShippingDate()) ));
 		}
 		
 		if (deliverySearchFilterDto.getCustomerId() != null && !deliverySearchFilterDto.getCustomerId().equals("")) {

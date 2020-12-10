@@ -1,10 +1,9 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="https://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>Gestione ordini</title>
+<head th:replace="fragments/commonHead :: commonHead">
 </head>
 <body>
+<div th:replace="fragments/header :: header"></div>
 Welcome in customer/delivery
 <p><a th:href="@{/customer}">Customers</a></p>
 <p><a th:href="@{/delivery}">Deliveries</a></p>
