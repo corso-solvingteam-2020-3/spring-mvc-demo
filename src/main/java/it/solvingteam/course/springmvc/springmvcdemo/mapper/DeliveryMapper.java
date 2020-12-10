@@ -45,9 +45,7 @@ public class DeliveryMapper extends AbstractMapper<Delivery, DeliveryDto> {
 		
 		delivery.setDescription(dto.getDescription());
 		
-		// data di spedizione 
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-		LocalDate date = LocalDate.parse(dto.getShippingDate(), formatter);
+		LocalDate date = LocalDate.parse(dto.getShippingDate());
 		delivery.setShippingDate(date);
 		
 		delivery.setPrice(Double.parseDouble(dto.getPrice()));
