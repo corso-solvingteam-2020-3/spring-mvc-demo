@@ -1,14 +1,21 @@
 package it.solvingteam.course.springmvc.springmvcdemo.dto;
 
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+
 public class CustomerDto {
 
-    private String id;
+	@NotNull(message = "il campo non esiste")
+	private String id;
 
-    private String name;
+	@NotEmpty(message = "Required field")
+	private String name;
 
-    private String mobile;
+	@NotEmpty(message = "Required field")
+	private String mobile;
 
-    private String address;
+	@NotEmpty(message = "Required field")
+	private String address;
 
     public String getId() {
         return id;

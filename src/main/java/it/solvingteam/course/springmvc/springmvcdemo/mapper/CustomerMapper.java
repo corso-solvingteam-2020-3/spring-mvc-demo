@@ -1,6 +1,7 @@
 package it.solvingteam.course.springmvc.springmvcdemo.mapper;
 
 import it.solvingteam.course.springmvc.springmvcdemo.dto.CustomerDto;
+import it.solvingteam.course.springmvc.springmvcdemo.dto.messages.AddCustomerMessageDTO;
 import it.solvingteam.course.springmvc.springmvcdemo.model.Customer;
 import org.springframework.stereotype.Component;
 
@@ -38,5 +39,18 @@ public class CustomerMapper extends AbstractMapper<Customer, CustomerDto> {
         customer.setMobile(dto.getMobile());
 
         return customer;
+    }
+
+    public Customer convertDtoToEntity(AddCustomerMessageDTO dto) {
+    	if (dto == null) {
+    		return null;
+    	}
+    	
+    	Customer customer = new Customer();
+    	customer.setName(dto.getName());
+    	customer.setAddress(dto.getAddress());
+    	customer.setMobile(dto.getMobile());
+    	
+    	return customer;
     }
 }

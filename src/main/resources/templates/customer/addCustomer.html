@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+ <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<h1>Add Customer</h1>
+<div>
+    <form action="#" th:action="@{/customer/addCustomer}" th:object="${customerAddModel}" method="post">
+        <p>Name: <input th:field="*{name}" type="text"></p>
+        <p style="color:red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></p>
+        
+        <p>Address: <input th:field="*{address}" type="text"></p>
+        <p style="color:red" th:if="${#fields.hasErrors('address')}" th:errors="*{address}"></p>
+        
+        <p>Mobile: <input th:field="*{mobile}" type="text"></p>
+        <p style="color:red" th:if="${#fields.hasErrors('mobile')}" th:errors="*{mobile}"></p>
+        
+        <p><input type="submit" value="Inserisci"/></p>
+    </form>
+</div>
+</body>
+</html>

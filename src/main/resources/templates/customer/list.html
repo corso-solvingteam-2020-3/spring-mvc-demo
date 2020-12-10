@@ -23,16 +23,25 @@
         <th>Name</th>
         <th>Address</th>
         <th>Mobile</th>
+        <th> Action </th>
     </tr>
     </thead>
     <tbody>
-    <tr th:each="customer : ${customers}">
-        <td th:text="${customer.id}"></td>
-        <td th:text="${customer.name}"></td>
-        <td th:text="${customer.address}"></td>
-        <td th:text="${customer.mobile}"></td>
+    <tr th:each="customer : ${customers}" th:object="${customer}" >
+        <td th:text="*{id}"></td>
+        <td th:text="*{name}"></td>
+        <td th:text="*{address}"></td>
+        <td th:text="*{mobile}"></td>
+        <td>
+        <a th:href="@{/customer/showCustomer(id=${customer.id})}"> visualizza</a>
+        <a th:href="@{/customer/updateCustomer(id=${customer.id})}"> modifica</a>
+         <a th:href="@{/customer/prepareDeleteCustomer(id=${customer.id})}"> elimina</a>
+        </td>
     </tr>
     </tbody>
 </table>
+  <a th:href="@{/customer/addCustomer}"> Add Customer</a>
+ 
+   
 </body>
 </html>

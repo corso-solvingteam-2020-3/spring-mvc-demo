@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+ <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+  <div class='card-body' th:object = '${delivery}'>
+		    
+		    	<dl class="row">
+				  <dt class="col-sm-3 text-right">Description:</dt>
+				  <dd class="col-sm-9" th:text="*{description}"></dd>
+		    	</dl>
+		    	
+		    	<dl class="row">
+				  <dt class="col-sm-3 text-right">Shipping Date</dt>
+				  <dd class="col-sm-9" th:text="*{shippingDate}"></dd>
+		    	</dl>
+		    	
+		    	<dl class="row">
+				  <dt class="col-sm-3 text-right">Price</dt>
+				  <dd class="col-sm-9" th:text="*{price}"></dd>
+		    	</dl>
+		       	<dl class="row">
+				  <dt class="col-sm-3 text-right">Customer</dt>
+				  <dd class="col-sm-9" th:text="*{customer.name}"></dd>
+		    	</dl>
+		    
+		    	
+		    	
+		    	
+		    </div>
+
+</body>
+</html>

@@ -1,74 +1,108 @@
 package it.solvingteam.course.springmvc.springmvcdemo.service;
 
-import it.solvingteam.course.springmvc.springmvcdemo.dto.CustomerDto;
-import it.solvingteam.course.springmvc.springmvcdemo.dto.messages.CustomersSearchFilterDto;
-import it.solvingteam.course.springmvc.springmvcdemo.mapper.CustomerMapper;
-import it.solvingteam.course.springmvc.springmvcdemo.model.Customer;
-import it.solvingteam.course.springmvc.springmvcdemo.repository.CustomerRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Example;
-import org.springframework.data.domain.ExampleMatcher;
-import org.springframework.stereotype.Service;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
-import java.util.ArrayList;
-import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import it.solvingteam.course.springmvc.springmvcdemo.dto.CustomerDto;
+import it.solvingteam.course.springmvc.springmvcdemo.dto.messages.AddCustomerMessageDTO;
+import it.solvingteam.course.springmvc.springmvcdemo.dto.messages.CustomersSearchFilterDto;
+import it.solvingteam.course.springmvc.springmvcdemo.exceptions.RoleNotFoundException;
+import it.solvingteam.course.springmvc.springmvcdemo.mapper.CustomerMapper;
+import it.solvingteam.course.springmvc.springmvcdemo.model.Customer;
+import it.solvingteam.course.springmvc.springmvcdemo.repository.CustomerRepository;
 
 @Service
 public class CustomerService {
 
-    @Autowired
-    private CustomerRepository customerRepository;
+	@Autowired
+	private CustomerRepository customerRepository;
 
-    @Autowired
-    private CustomerMapper customerMapper;
+	@Autowired
+	private CustomerMapper customerMapper;
 
-    @Autowired
-    private EntityManager entityManager;
+	@Autowired
+	private EntityManager entityManager;
 
-    public List<CustomerDto> findAll() {
-        List<Customer> allCustomers = this.customerRepository.findAll();
-        return customerMapper.convertEntityToDto(allCustomers);
-    }
+	public List<CustomerDto> findAll() {
+		List<Customer> allCustomers = this.customerRepository.findAll();
+		return customerMapper.convertEntityToDto(allCustomers);
+	}
 
-    public List<CustomerDto> findBySearchParameter(CustomersSearchFilterDto customersSearchFilterDto) {
-        CriteriaBuilder cb = entityManager.getCriteriaBuilder();
-        CriteriaQuery<Customer> cq = cb.createQuery(Customer.class);
+	public Optional<Customer> findById(Integer id) {
+		return this.customerRepository.findById(id);
+	}
 
-        Root<Customer> customer = cq.from(Customer.class);
-        List<Predicate> predicates = new ArrayList<>();
+	public List<CustomerDto> findBySearchParameter(CustomersSearchFilterDto customersSearchFilterDto) {
+		CriteriaBuilder cb = entityManager.getCriteriaBuilder();
+		CriteriaQuery<Customer> cq = cb.createQuery(Customer.class);
 
-        if (customersSearchFilterDto.getId() != null && !customersSearchFilterDto.getId().equals("")) {
-            predicates.add(cb.like(customer.get("id").as(String.class), "%" + customersSearchFilterDto.getId() + "%"));
-        }
+		Root<Customer> customer = cq.from(Customer.class);
+		List<Predicate> predicates = new ArrayList<>();
 
-        if (customersSearchFilterDto.getName() != null && !customersSearchFilterDto.getName().equals("")) {
-            predicates.add(cb.like(customer.get("name"), "%" + customersSearchFilterDto.getName() + "%"));
-        }
+		if (customersSearchFilterDto.getId() != null && !customersSearchFilterDto.getId().equals("")) {
+			predicates.add(cb.like(customer.get("id").as(String.class), "%" + customersSearchFilterDto.getId() + "%"));
+		}
 
-        if (customersSearchFilterDto.getAddress() != null && !customersSearchFilterDto.getAddress().equals("")) {
-            predicates.add(cb.like(customer.get("address"), "%" + customersSearchFilterDto.getAddress() + "%"));
-        }
+		if (customersSearchFilterDto.getName() != null && !customersSearchFilterDto.getName().equals("")) {
+			predicates.add(cb.like(customer.get("name"), "%" + customersSearchFilterDto.getName() + "%"));
+		}
 
-        if (customersSearchFilterDto.getMobile() != null && !customersSearchFilterDto.getMobile().equals("")) {
-            predicates.add(cb.like(customer.get("mobile"), "%" + customersSearchFilterDto.getMobile() + "%"));
-        }
+		if (customersSearchFilterDto.getAddress() != null && !customersSearchFilterDto.getAddress().equals("")) {
+			predicates.add(cb.like(customer.get("address"), "%" + customersSearchFilterDto.getAddress() + "%"));
+		}
 
-        cq.where(predicates.toArray(new Predicate[0]));
-        return customerMapper.convertEntityToDto(entityManager.createQuery(cq).getResultList());
-    }
+		if (customersSearchFilterDto.getMobile() != null && !customersSearchFilterDto.getMobile().equals("")) {
+			predicates.add(cb.like(customer.get("mobile"), "%" + customersSearchFilterDto.getMobile() + "%"));
+		}
 
-    public Customer save(CustomerDto customerDto) {
-        Customer customer = customerMapper.convertDtoToEntity(customerDto);
-        return this.customerRepository.save(customer);
-    }
+		cq.where(predicates.toArray(new Predicate[0]));
+		return customerMapper.convertEntityToDto(entityManager.createQuery(cq).getResultList());
+	}
 
-    public long count() {
-        return this.customerRepository.count();
-    }
+	public Customer save(CustomerDto customerDto) {
+		Customer customer = customerMapper.convertDtoToEntity(customerDto);
+		return this.customerRepository.save(customer);
+	}
 
+	public long count() {
+		return this.customerRepository.count();
+	}
+
+	public void insertCustomer(AddCustomerMessageDTO addCustomerMessageDto) throws RoleNotFoundException {
+		this.customerRepository.save(customerMapper.convertDtoToEntity(addCustomerMessageDto));
+	}
+
+	public Optional<Customer> findCustomerByName(String name) {
+		return customerRepository.findByName(name);
+	}
+
+	public void updateCustomer(CustomerDto customerDto) {
+		Customer customer = customerMapper.convertDtoToEntity(customerDto);
+		this.customerRepository.save(customer);
+
+	}
+
+	public CustomerDto convertCustomer(Integer id) {
+		Customer customer = this.findById(id).orElse(null);
+		return customerMapper.convertEntityToDto(customer);
+	}
+
+	public Customer convertCustomerInEntity(CustomerDto customerDto) {
+	  return customerMapper.convertDtoToEntity(customerDto);
+	}
+	
+	public void deleteCustomer(Integer id) {
+		Customer customer = customerRepository.findById(id).orElse(null);
+		this.customerRepository.delete(customer);
+	}
 }

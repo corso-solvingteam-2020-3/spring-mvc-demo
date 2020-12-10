@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+ <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<h1>Add Customer</h1>
+<div>
+    <form action="#" th:action="@{/delivery/addDelivery}" th:object="${deliveryAddModel}" method="post">
+        <p>Description: <input th:field="*{description}" type="text"></p>
+        <p style="color:red" th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></p>
+        
+        <p>Shipping Date: <input th:field="*{shippingDate}" type="date"></p>
+        <p style="color:red" th:if="${#fields.hasErrors('shippingDate')}" th:errors="*{shippingDate}"></p>
+        
+        <p>Price: <input th:field="*{price}" type="number"></p>
+        <p style="color:red" th:if="${#fields.hasErrors('price')}" th:errors="*{price}"></p>
+        
+        <p> Customer </p>
+        <select th:field="*{customer}">
+			<option value="">- Select Customer -</option>
+			<option  th:each= "customer : ${customers}"  th:value="${customer.id}" th:text="${customer.name}" />
+		</select>	
+		 <p style="color:red" th:if="${#fields.hasErrors('customer')}" th:errors="*{customer}"></p>
+        <p><input type="submit" value="Inserisci"/></p>
+    </form>
+</div>
+</body>
+</html>
