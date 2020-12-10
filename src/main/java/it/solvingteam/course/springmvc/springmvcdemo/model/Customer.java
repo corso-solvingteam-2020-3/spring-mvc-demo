@@ -1,9 +1,13 @@
 package it.solvingteam.course.springmvc.springmvcdemo.model;
 
+import java.util.List;
+
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Customer {
@@ -17,6 +21,9 @@ public class Customer {
     private String mobile;
 
     private String address;
+    
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "customer", orphanRemoval = true)
+	private List<Delivery> deliveries;
 
     public Integer getId() {
         return id;
@@ -49,4 +56,12 @@ public class Customer {
     public void setAddress(String address) {
         this.address = address;
     }
+
+	public List<Delivery> getDeliveries() {
+		return deliveries;
+	}
+
+	public void setDeliveries(List<Delivery> deliveries) {
+		this.deliveries = deliveries;
+	}
 }
