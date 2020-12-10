@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+<h1>Show Delivery</h1>
+
+<div th:object="${delivery}">
+
+<dl>
+<dt> Description: </dt>
+<dd th:text="*{description}">  </dd> 
+</dl>
+<dl>
+<dt> Price: </dt>
+<dd th:text="*{price}">  </dd>
+</dl>
+<dl>
+<dt> Shipping Date: </dt>
+<dd th:text="*{shippingDate}">  </dd>
+</dl>
+<dl>
+<dt> Customer: </dt>
+<dd th:text="*{customer.name}">  </dd>
+</dl>
+
+<a th:href="@{/delivery}"> Back </a>
+
+</div>
+</body>
+</html>
