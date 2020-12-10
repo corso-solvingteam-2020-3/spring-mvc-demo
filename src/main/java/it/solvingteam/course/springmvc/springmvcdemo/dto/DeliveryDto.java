@@ -1,6 +1,7 @@
 package it.solvingteam.course.springmvc.springmvcdemo.dto;
 
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 public class DeliveryDto {
 	
@@ -16,7 +17,7 @@ public class DeliveryDto {
 	@NotEmpty(message = "Required field")
 	private String price;
 	
-	@NotEmpty(message = "Required field")
+	@NotNull(message = "Required field")
 	private CustomerDto customer;
 
 	public String getId() {

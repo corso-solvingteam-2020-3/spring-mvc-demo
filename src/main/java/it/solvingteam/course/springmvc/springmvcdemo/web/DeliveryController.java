@@ -69,9 +69,10 @@ public class DeliveryController {
     }
     
     @PostMapping("insertDelivery")
-    public String insertCustomer(@Valid @ModelAttribute("newDelivery") DeliveryDtoForInsert deliveryDtoForInsert, BindingResult bindingResult){
+    public String insertCustomer(@Valid @ModelAttribute("newDelivery") DeliveryDtoForInsert deliveryDtoForInsert, BindingResult bindingResult, Model model){
 
         if (bindingResult.hasErrors()) {
+        	 model.addAttribute("allCustomers", customerService.findAll());
             return "delivery/insertDelivery";
         } else {
         	DeliveryDto deliveryDaInserire = new DeliveryDto();
@@ -103,6 +104,43 @@ public class DeliveryController {
     	model.addAttribute("deliveryToShow", deliveryDaVisualizzare);
     	
 		return "/delivery/show";
+    	
+    }
+    
+    
+    /*
+     * ---------------- MODIFICA DI UNA DELIVERY ---------------------
+     * 
+     */
+    
+    @GetMapping("prepareEdit/{id}")
+    public String prepareEdit(@PathVariable Integer id, Model model) {
+    	
+    	DeliveryDto deliveryDaAggiornare = deliveryService.findById(id);
+    	
+    	List<CustomerDto> allCustomers = customerService.findAll();
+    	
+    	model.addAttribute("deliveryToEdit", deliveryDaAggiornare);
+    	
+    	model.addAttribute("allCustomers", allCustomers);
+    	
+		return "delivery/editDelivery";
+    	
+    }
+    
+    @PostMapping("editDelivery")
+    public String editDelivery(@Valid @ModelAttribute("deliveryToEdit") DeliveryDto deliveryDto, BindingResult bindingResult, Model model){
+		
+    	if (bindingResult.hasErrors()) {
+    		
+    		List<CustomerDto> allCustomers = customerService.findAll();
+    		model.addAttribute("allCustomers", allCustomers);
+    		
+            return "delivery/editDelivery";
+        } else {
+        	deliveryService.update(deliveryDto);
+        	return "redirect:/delivery/";
+        }
     	
     }
 	
