@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import it.solvingteam.course.springmvc.springmvcdemo.dto.messages.DeliveryDto;
 import it.solvingteam.course.springmvc.springmvcdemo.dto.messages.DeliveryInsertMessageDto;
 import it.solvingteam.course.springmvc.springmvcdemo.dto.messages.DeliverySearchFilterDto;
-import it.solvingteam.course.springmvc.springmvcdemo.model.Delivery;
 import it.solvingteam.course.springmvc.springmvcdemo.service.CustomerService;
 import it.solvingteam.course.springmvc.springmvcdemo.service.DeliveryService;
 
@@ -51,11 +50,12 @@ public class DeliveryController {
 
 	@PostMapping("executeInsert")
 	public String executeInsert( @Valid @ModelAttribute("deliveryInsertModel") DeliveryInsertMessageDto deliveryInsertMessageDto,
-								BindingResult bindingResult, Model model, @RequestParam("customer.id") Integer idCustomer) {
+								BindingResult bindingResult, Model model) {
 		if (bindingResult.hasErrors()) {
+			model.addAttribute("customersInsertDelivery", customerService.findAll());
 			return "delivery/insert";
 		} else {
-			deliveryService.insert(deliveryInsertMessageDto, idCustomer);
+			deliveryService.insert(deliveryInsertMessageDto);
 			return "redirect:/delivery";
 		}
 	}

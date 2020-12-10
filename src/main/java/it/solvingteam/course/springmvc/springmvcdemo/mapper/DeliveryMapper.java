@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import org.springframework.stereotype.Component;
 
 import it.solvingteam.course.springmvc.springmvcdemo.dto.messages.DeliveryDto;
+import it.solvingteam.course.springmvc.springmvcdemo.model.Customer;
 import it.solvingteam.course.springmvc.springmvcdemo.model.Delivery;
 
 @Component
@@ -19,8 +20,9 @@ public class DeliveryMapper extends AbstractMapper <Delivery, DeliveryDto>{
         DeliveryDto deliveryDto = new DeliveryDto();
         deliveryDto.setId(String.valueOf(entity.getId()));
         deliveryDto.setDescription(entity.getDescription());
-        deliveryDto.setDeliveryDate(String.valueOf(entity.getDeliveryDate()));
+        deliveryDto.setShippingDate(String.valueOf(entity.getShippingDate()));
         deliveryDto.setPrice(String.valueOf(entity.getPrice()));
+        deliveryDto.setCustomer(String.valueOf(entity.getCustomer()));
 
         return deliveryDto;
     }
@@ -38,9 +40,11 @@ public class DeliveryMapper extends AbstractMapper <Delivery, DeliveryDto>{
         }
 
         delivery.setDescription(dto.getDescription());
-        delivery.setDeliveryDate(LocalDate.parse(dto.getDeliveryDate()));
+        delivery.setShippingDate(LocalDate.parse(dto.getShippingDate()));
         delivery.setPrice(Double.parseDouble(dto.getPrice()));
-
+        Customer customer = new Customer();
+        customer.setId(Integer.parseInt(dto.getCustomer()));
+        delivery.setCustomer(customer);
         return delivery;
     }
 	

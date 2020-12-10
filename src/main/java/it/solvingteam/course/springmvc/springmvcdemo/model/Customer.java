@@ -64,4 +64,11 @@ public class Customer {
 	public void setDeliveries(List<Delivery> deliveries) {
 		this.deliveries = deliveries;
 	}
+
+	@Override
+	public String toString() {
+		return  name + " - " + address;
+	}
+	
+	
 }

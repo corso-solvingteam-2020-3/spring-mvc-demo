@@ -15,13 +15,13 @@
     <p>Description: <input type="text" th:field="*{description}"/></p>
     <p style="color:red" th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></p>
 
-    <p>Delivery Date: <input type="date" th:field="*{deliveryDate}"/></p>
-    <p style="color:red" th:if="${#fields.hasErrors('deliveryDate')}" th:errors="*{deliveryDate}"></p>
+    <p>Shipping Date: <input type="date" th:field="*{shippingDate}"/></p>
+    <p style="color:red" th:if="${#fields.hasErrors('shippingDate')}" th:errors="*{shippingDate}"></p>
 
     <p>Price: <input type="number" step="0.05" th:field="*{price}"/></p>
     <p style="color:red" th:if="${#fields.hasErrors('price')}" th:errors="*{price}"></p>
     
-    <select th:field="${customersInsertDelivery}">
+    <select th:field="*{customer}">
     <option th:each="customer : ${customersInsertDelivery}" th:value="${customer.id}" th:text="${customer.name}"></option>
 </select>
 

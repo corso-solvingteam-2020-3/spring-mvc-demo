@@ -66,8 +66,12 @@ public class DeliveryService {
             predicates.add(cb.lessThan(delivery.get("price"), "%" + deliverySearchFilterDto.getPrice() + "%"));
         }
 
-        if (deliverySearchFilterDto.getDeliveryDate() != null && !deliverySearchFilterDto.getDeliveryDate().equals("")) {
-            predicates.add(cb.like(delivery.get("deliveryDate"), "%" + deliverySearchFilterDto.getDeliveryDate() + "%"));
+        if (deliverySearchFilterDto.getShippingDate() != null && !deliverySearchFilterDto.getShippingDate().equals("")) {
+            predicates.add(cb.like(delivery.get("shippingDate"), "%" + deliverySearchFilterDto.getShippingDate() + "%"));
+        }
+        
+        if (deliverySearchFilterDto.getCustomer() != null && !deliverySearchFilterDto.getCustomer().equals("")) {
+        	predicates.add(cb.like(delivery.get("customer").as(String.class), "%" + deliverySearchFilterDto.getCustomer() + "%"));
         }
 
         cq.where(predicates.toArray(new Predicate[0]));
@@ -83,17 +87,18 @@ public class DeliveryService {
         return this.deliveryRepository.count();
     }
     
-    public Delivery insert(DeliveryInsertMessageDto insertDeliveryMessageDto, Integer idCustomer) {
+    public Delivery insert(DeliveryInsertMessageDto insertDeliveryMessageDto) {
     	String description = insertDeliveryMessageDto.getDescription();
-    	String deliveryDate = insertDeliveryMessageDto.getDeliveryDate();
+    	String shippingDate = insertDeliveryMessageDto.getShippingDate();
     	String price = insertDeliveryMessageDto.getPrice();
+    	String idCustomerInsert = insertDeliveryMessageDto.getCustomer();
     	
     	Delivery delivery = new Delivery();
     	delivery.setDescription(description);
-    	delivery.setDeliveryDate(LocalDate.parse(deliveryDate));
+    	delivery.setShippingDate(LocalDate.parse(shippingDate));
     	delivery.setPrice(Double.parseDouble(price));
-    	Customer customer = customerService.findById(idCustomer).orElse(null);
-    	delivery.setCustomer(customer);
+    	Optional<Customer> customer = customerService.findById(Integer.parseInt(idCustomerInsert));
+    	delivery.setCustomer(customer.get()); 
     	return this.deliveryRepository.save(delivery);
     }
 

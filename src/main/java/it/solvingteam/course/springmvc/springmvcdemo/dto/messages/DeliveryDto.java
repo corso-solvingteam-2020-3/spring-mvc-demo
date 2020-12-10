@@ -12,10 +12,12 @@ public class DeliveryDto {
 	private String description;
 
 	@NotEmpty(message = "The Delivery Date is required")
-    private String deliveryDate;
+    private String shippingDate;
 
 	@NotEmpty(message = "The price is required")
     private String price;
+	
+	private String customer;
 
 	public String getId() {
 		return id;
@@ -33,12 +35,12 @@ public class DeliveryDto {
 		this.description = description;
 	}
 
-	public String getDeliveryDate() {
-		return deliveryDate;
+	public String getShippingDate() {
+		return shippingDate;
 	}
 
-	public void setDeliveryDate(String deliveryDate) {
-		this.deliveryDate = deliveryDate;
+	public void setShippingDate(String shippingDate) {
+		this.shippingDate = shippingDate;
 	}
 
 	public String getPrice() {
@@ -48,5 +50,14 @@ public class DeliveryDto {
 	public void setPrice(String price) {
 		this.price = price;
 	}
-		
+
+	public String getCustomer() {
+		return customer;
+	}
+
+	public void setCustomer(String customer) {
+		this.customer = customer;
+	}
+	
+	
 }

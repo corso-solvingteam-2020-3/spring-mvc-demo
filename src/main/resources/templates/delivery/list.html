@@ -9,10 +9,10 @@
 <p><a th:href="@{/}">Indietro</a></p>
 <h1>Dashboard deliveries</h1>
 <div>
-    <form action="#" th:action="@{/customer}" th:object="${searchFilters}" method="get">
+    <form action="#" th:action="@{/delivery}" th:object="${searchFilters}" method="get">
         <p>ID: <input th:field="*{id}" type="text"></p>
         <p>Description: <input th:field="*{description}" type="text"></p>
-        <p>Delivery Date: <input th:field="*{deliveryDate}" type="date"></p>
+        <p>Shipping Date: <input th:field="*{shippingDate}" type="date"></p>
         <p>Price: <input th:field="*{price}" type="number"></p>
         <select th:field="${customersDelivery}">
     	<option th:each="customer : ${customersDelivery}" th:value="${customer.id}" th:text="${customer.name}"> - Select Customer - </option>
@@ -26,7 +26,7 @@
     <tr>
         <th>ID</th>
         <th>Description</th>
-        <th>Delivery Date</th>
+        <th>Shipping Date</th>
         <th>Price</th>
         <th>Customer</th>
     </tr>
@@ -35,9 +35,9 @@
     <tr th:each="delivery : ${deliveries}" th:object="${delivery}">
         <td th:text="*{id}"></td>
         <td th:text="*{description}"></td>
-        <td th:text="*{deliveryDate}"></td>
+        <td th:text="*{shippingDate}"></td>
         <td th:text="*{price}"></td>
-        <td th:text="*{customer.name}"></td>
+        <td th:text="*{customer}"></td>
         
         <td>
         <a th:href="@{/delivery/show/{deliveryId}(deliveryId=*{id})}">Visualizza</a>

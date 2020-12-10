@@ -16,7 +16,7 @@ public class Delivery {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
  	private String description;
- 	private LocalDate deliveryDate;
+ 	private LocalDate shippingDate;
  	private Double price;
 	 	
  	@ManyToOne(fetch = FetchType.LAZY)
@@ -38,12 +38,12 @@ public class Delivery {
 		this.description = description;
 	}
 
-	public LocalDate getDeliveryDate() {
-		return deliveryDate;
+	public LocalDate getShippingDate() {
+		return shippingDate;
 	}
 
-	public void setDeliveryDate(LocalDate deliveryDate) {
-		this.deliveryDate = deliveryDate;
+	public void setShippingDate(LocalDate shippingDate) {
+		this.shippingDate = shippingDate;
 	}
 
 	public Double getPrice() {
