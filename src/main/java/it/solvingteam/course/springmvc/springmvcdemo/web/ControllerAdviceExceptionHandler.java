@@ -1,7 +1,7 @@
 package it.solvingteam.course.springmvc.springmvcdemo.web;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import java.time.format.DateTimeParseException;
+
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -9,18 +9,22 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 @ControllerAdvice
 public class ControllerAdviceExceptionHandler {
 
-    private final static Logger logger = LoggerFactory.getLogger(ControllerAdviceExceptionHandler.class);
+//    private final static Logger logger = LoggerFactory.getLogger(ControllerAdviceExceptionHandler.class);
     
     
     @ExceptionHandler(DataIntegrityViolationException.class)
     public String exceptionHandler0(DataIntegrityViolationException e) {
-        return "redirect:/customer/";
+        return "redirect:/";
     }
     
-    @ExceptionHandler(Exception.class)
-    public String exceptionHandler(Exception e) {
-        logger.error("An error has occurred: ", e);
-        return "error";
+    @ExceptionHandler(DateTimeParseException.class)
+    public String exceptionHandler1(DateTimeParseException e) {
+    	return "redirect:/";
+    }
+      
+    @ExceptionHandler(NumberFormatException.class)
+    public String exceptionHandler2(NumberFormatException e) {
+    	return "redirect:/";
     }
 
 }
