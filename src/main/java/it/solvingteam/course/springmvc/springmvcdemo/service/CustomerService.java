@@ -2,6 +2,7 @@ package it.solvingteam.course.springmvc.springmvcdemo.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.criteria.CriteriaBuilder;
@@ -14,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import it.solvingteam.course.springmvc.springmvcdemo.dto.CustomerDto;
+import it.solvingteam.course.springmvc.springmvcdemo.dto.messages.CustomerDeletionDto;
 import it.solvingteam.course.springmvc.springmvcdemo.dto.messages.CustomerInsertDto;
 import it.solvingteam.course.springmvc.springmvcdemo.dto.messages.CustomersSearchFilterDto;
 import it.solvingteam.course.springmvc.springmvcdemo.mapper.CustomerMapper;
@@ -33,7 +35,7 @@ public class CustomerService {
     private EntityManager entityManager;
 
     public List<CustomerDto> findAll() {
-        List<Customer> allCustomers = this.customerRepository.findAll();
+        List<Customer> allCustomers = this.customerRepository.findAllFetchDeliveries();
         return customerMapper.convertEntityToDto(allCustomers);
     }
 
@@ -99,6 +101,15 @@ public class CustomerService {
 		}
 		customerRepository.delete(customer);
 		return true;
+	}
+
+	public boolean hasDeliveries(CustomerDeletionDto dto) {
+		Integer customerId = Integer.valueOf(dto.getIdToDelete());
+        Optional<Customer> customer = customerRepository.findByIdFetchDeliveries(customerId);
+        if (customer.isPresent()) {
+        	return customer.get().getDeliveries().size() > 0;
+        }
+		return false;
 	}
 
 }

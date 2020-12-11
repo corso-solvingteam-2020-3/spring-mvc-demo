@@ -2,8 +2,8 @@
 <html lang="en" xmlns:th="https://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
-    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <title>Dashboard customers</title>
+    <!-- <link rel="stylesheet" th:href="@{/css/style.css}">  -->
 </head>
 <body>
 <h1>Dashboard customers</h1>
@@ -36,11 +36,13 @@
         <td th:text="*{address}"></td>
         <td th:text="*{mobile}"></td>
         <td>
-        	<a th:href="@{/customer/{id}/show(id=${customer.id})}"><button th:href="@{/customer/show}">Show</button></a>
-        	<a th:href="@{/customer/{id}/update(id=${customer.id})}"><button th:href="@{/customer/update}">Update</button></a>
-        	<a th:href="@{/customer/{id}/delete(id=${customer.id})}"><button th:href="@{/customer/delete}">Delete</button></a>
+        	<a th:href="@{/customer/{id}/show(id=${customer.id})}"><button>Show</button></a>
+        	<a th:href="@{/customer/{id}/update(id=${customer.id})}"><button>Update</button></a>
+        	<a th:href="@{/customer/{idToDelete}/delete(idToDelete=${customer.id}, id=${searchFilters.id}, name=${searchFilters.name}, address=${searchFilters.address}, mobile=${searchFilters.mobile})}"><button>Delete</button></a>
         </td>
+        
     </tr>
+   	<tr style="color:red" th:if="${#fields.hasErrors('customerDeletionModel.idToDelete')}" th:errors="${customerDeletionModel.idToDelete}">  </tr>
     </tbody>
 </table>
 <a th:href="@{/}"><button>Back</button></a>

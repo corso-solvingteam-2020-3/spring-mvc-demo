@@ -25,7 +25,7 @@ public class Customer {
 	@OneToMany(mappedBy = "customer", fetch = FetchType.LAZY)
     private Set<Delivery> deliveries;
 
-    public Integer getId() {
+	public Integer getId() {
         return id;
     }
 
@@ -56,4 +56,12 @@ public class Customer {
     public void setAddress(String address) {
         this.address = address;
     }
+    
+    public Set<Delivery> getDeliveries() {
+		return deliveries;
+	}
+
+	public void setDeliveries(Set<Delivery> deliveries) {
+		this.deliveries = deliveries;
+	}
 }

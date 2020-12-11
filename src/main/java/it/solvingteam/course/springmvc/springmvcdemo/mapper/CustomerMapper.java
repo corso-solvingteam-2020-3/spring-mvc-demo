@@ -19,7 +19,7 @@ public class CustomerMapper extends AbstractMapper<Customer, CustomerDto> {
         customerDto.setName(entity.getName());
         customerDto.setAddress(entity.getAddress());
         customerDto.setMobile(entity.getMobile());
-
+        customerDto.setDeliveriesCount(String.valueOf(entity.getDeliveries().size()));
         return customerDto;
     }
 

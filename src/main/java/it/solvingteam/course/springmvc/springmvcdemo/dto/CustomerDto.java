@@ -1,6 +1,10 @@
 package it.solvingteam.course.springmvc.springmvcdemo.dto;
 
+import java.util.Set;
+
 import javax.validation.constraints.NotEmpty;
+
+import it.solvingteam.course.springmvc.springmvcdemo.model.Delivery;
 
 public class CustomerDto {
 
@@ -15,6 +19,8 @@ public class CustomerDto {
 
     @NotEmpty(message = "Required field")
     private String address;
+    
+    private String deliveriesCount;
 
     public String getId() {
         return id;
@@ -47,8 +53,16 @@ public class CustomerDto {
     public void setAddress(String address) {
         this.address = address;
     }
-    
-    @Override
+
+	public String getDeliveriesCount() {
+		return deliveriesCount;
+	}
+
+	public void setDeliveriesCount(String deliveriesCount) {
+		this.deliveriesCount = deliveriesCount;
+	}
+
+	@Override
 	public String toString() {
 		return id + ". " + name;
 	}

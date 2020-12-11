@@ -15,9 +15,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import it.solvingteam.course.springmvc.springmvcdemo.dto.CustomerDto;
+import it.solvingteam.course.springmvc.springmvcdemo.dto.messages.CustomerDeletionDto;
 import it.solvingteam.course.springmvc.springmvcdemo.dto.messages.CustomerInsertDto;
 import it.solvingteam.course.springmvc.springmvcdemo.dto.messages.CustomersSearchFilterDto;
+import it.solvingteam.course.springmvc.springmvcdemo.dto.messages.UserSignupMessageDto;
 import it.solvingteam.course.springmvc.springmvcdemo.service.CustomerService;
+import it.solvingteam.course.springmvc.springmvcdemo.web.validators.CustomerDeletionDtoValidator;
 
 @Controller
 @RequestMapping("customer")
@@ -25,13 +28,17 @@ public class CustomerController {
 
     @Autowired
     private CustomerService customerService;
+    
+    @Autowired
+    private CustomerDeletionDtoValidator customerDeletionDtoValidator;
 
     @GetMapping
-    public String list(CustomersSearchFilterDto customersSearchFilterDto, Model model) {
+    public String list(@ModelAttribute("searchFilters") CustomersSearchFilterDto customersSearchFilterDto, Model model) {
         List<CustomerDto> allCustomers = customerService.findBySearchParameter(customersSearchFilterDto);
 
-        model.addAttribute("searchFilters", customersSearchFilterDto);
+//        model.addAttribute("searchFilters", customersSearchFilterDto);
         model.addAttribute("customers", allCustomers);
+        model.addAttribute("customerDeletionModel", new CustomerDeletionDto());
 
         return "customer/list";
     }
@@ -78,11 +85,20 @@ public class CustomerController {
         }
     }
     
-    @GetMapping("{id}/delete")
-    public String goDelete(@PathVariable Integer id, Model model) {
-    	CustomerDto dto = customerService.show(id);
-        model.addAttribute("customerModel", dto);
-        return "customer/delete";
+    @GetMapping("{idToDelete}/delete")
+    public String goDelete(@ModelAttribute("searchFilters") CustomersSearchFilterDto customersSearchFilterDto, @Valid @ModelAttribute("customerDeletionModel") CustomerDeletionDto customerDeletionDto, Model model, BindingResult bindingResult) {
+    	
+    	customerDeletionDtoValidator.validate(customerDeletionDto, bindingResult);
+    	
+    	if (bindingResult.hasErrors()) {
+    		List<CustomerDto> allCustomers = customerService.findBySearchParameter(customersSearchFilterDto);
+    		model.addAttribute("customers", allCustomers);
+            return "customer/list";
+        } else {
+        	CustomerDto dto = customerService.show(Integer.valueOf(customerDeletionDto.getIdToDelete()));
+        	model.addAttribute("customerModel", dto);
+    		return "customer/delete";
+        }   
     }
 
     @PostMapping("{id}/delete")
