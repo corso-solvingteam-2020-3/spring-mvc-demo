@@ -17,7 +17,7 @@ public class DeliveryDto {
 	@NotEmpty(message = "The price is required")
     private String price;
 	
-	private String customer;
+	private CustomerDto customerDto;
 
 	public String getId() {
 		return id;
@@ -51,12 +51,12 @@ public class DeliveryDto {
 		this.price = price;
 	}
 
-	public String getCustomer() {
-		return customer;
+	public CustomerDto getCustomerDto() {
+		return customerDto;
 	}
 
-	public void setCustomer(String customer) {
-		this.customer = customer;
+	public void setCustomerDto(CustomerDto customerDto) {
+		this.customerDto = customerDto;
 	}
 	
 	

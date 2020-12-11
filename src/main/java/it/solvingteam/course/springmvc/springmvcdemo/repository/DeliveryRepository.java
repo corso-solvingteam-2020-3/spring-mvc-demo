@@ -7,5 +7,4 @@ import it.solvingteam.course.springmvc.springmvcdemo.model.Delivery;
 public interface DeliveryRepository extends JpaRepository<Delivery, Integer>{
 
 	
-	
 }

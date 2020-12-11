@@ -36,7 +36,7 @@
         <td th:text="*{description}"></td>
         <td th:text="*{shippingDate}"></td>
         <td th:text="*{price}"></td>
-        <td th:text="*{customer}"></td>
+        <td th:text="*{customerDto.name}"></td>
         
         <td>
         <a th:href="@{/delivery/show/{deliveryId}(deliveryId=*{id})}">Visualizza</a>

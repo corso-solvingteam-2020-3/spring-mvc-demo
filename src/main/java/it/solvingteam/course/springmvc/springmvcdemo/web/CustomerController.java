@@ -13,12 +13,13 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
+import it.solvingteam.course.springmvc.springmvcdemo.dto.messages.CustomerDeleteMessageDto;
 import it.solvingteam.course.springmvc.springmvcdemo.dto.messages.CustomerDto;
 import it.solvingteam.course.springmvc.springmvcdemo.dto.messages.CustomerInsertMessageDto;
 import it.solvingteam.course.springmvc.springmvcdemo.dto.messages.CustomersSearchFilterDto;
 import it.solvingteam.course.springmvc.springmvcdemo.service.CustomerService;
+import it.solvingteam.course.springmvc.springmvcdemo.web.validators.CustomerDeleteMessageValidator;
 
 @Controller
 @RequestMapping("customer")
@@ -27,10 +28,14 @@ public class CustomerController {
 	@Autowired
 	private CustomerService customerService;
 
+	@Autowired
+	private CustomerDeleteMessageValidator customerDeleteMessageValidator;
+
 	@GetMapping
-	public String list(CustomersSearchFilterDto customersSearchFilterDto, Model model) {
+	public String list(CustomersSearchFilterDto customersSearchFilterDto, Model model, CustomerDeleteMessageDto customerDeleteMessageDto) {
 		List<CustomerDto> allCustomers = customerService.findBySearchParameter(customersSearchFilterDto);
 
+		model.addAttribute("customerDeleteModel", new CustomerDeleteMessageDto());
 		model.addAttribute("searchFilters", customersSearchFilterDto);
 		model.addAttribute("customers", allCustomers);
 
@@ -94,21 +99,33 @@ public class CustomerController {
 		}
 	}
 
-	@GetMapping("delete/{id}")
-	public String delete(@PathVariable Integer id, Model model) {
-
-		if (id != null) {
-			model.addAttribute("idCustomerDelete", id);
-			return "customer/delete";
-
-		} else {
+	@GetMapping("delete/{idCustomerDelete}")
+	public String delete(@Valid @ModelAttribute("customerDeleteModel") CustomerDeleteMessageDto customerDeleteMessageDto, BindingResult bindingResult, 
+			Model model, CustomersSearchFilterDto customersSearchFilterDto) {
+		
+		if (customerDeleteMessageDto.getIdCustomerDelete() != null) {
+			customerDeleteMessageValidator.validate(customerDeleteMessageDto, bindingResult);
+		
+			if (bindingResult.hasErrors()) {
+				List<CustomerDto> allCustomers = customerService.findBySearchParameter(customersSearchFilterDto);
+				model.addAttribute("customerDeleteModel", customerDeleteMessageDto);
+				model.addAttribute("searchFilters", customersSearchFilterDto);
+				model.addAttribute("customers", allCustomers);
+				return "customer/list";
+	
+			} else {
+				model.addAttribute("customerDelete", customerDeleteMessageDto);
+				return "customer/delete";
+			}
+		}	
 			return "redirect:/customer";
-		}
 	}
 
-	@GetMapping("executeDelete")
-	public String executeDelete(@RequestParam("idCustomerDelete") Integer id) {
-		customerService.delete(id);
+	@GetMapping("executeDelete/{idCustomerDelete}")
+	public String executeDelete(@Valid @ModelAttribute("customerDeleteModel") CustomerDeleteMessageDto customerDeleteMessageDto) {
+		
+		CustomerDto customerDtoDelete = customerService.customerEntityToCustomerDto(Integer.parseInt(customerDeleteMessageDto.getIdCustomerDelete()));
+		customerService.delete(customerDtoDelete);
 		return "redirect:/customer";
 	}
 }

@@ -78,9 +78,9 @@ public class DeliveryController {
 
 		if (id != null || !bindingResult.hasErrors()) {
 			DeliveryDto deliveryDtoUpdate = deliveryService.deliveryEntityToDeliveryDto(id);
+			model.addAttribute("customersUpdateDelivery", customerService.findAll());
 			model.addAttribute("deliveryUpdateModel", deliveryDtoUpdate);
 			return "delivery/update";
-
 		} else {
 			return "redirect:/delivery";
 		}
@@ -88,9 +88,10 @@ public class DeliveryController {
 
 	@PostMapping("executeUpdate")
 	public String executeUpdate(@Valid @ModelAttribute("deliveryUpdateModel") DeliveryDto deliveryDto,
-			BindingResult bindingResult) {
+			BindingResult bindingResult, Model model) {
 
 		if (bindingResult.hasErrors()) {
+			model.addAttribute("customersUpdateDelivery", customerService.findAll());
 			return "delivery/update";
 		} else {
 			deliveryService.update(deliveryDto);
@@ -104,7 +105,6 @@ public class DeliveryController {
 		if (id != null) {
 			model.addAttribute("idDeliveryDelete", id);
 			return "delivery/delete";
-
 		} else {
 			return "redirect:/delivery";
 		}

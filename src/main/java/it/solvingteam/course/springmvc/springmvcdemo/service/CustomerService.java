@@ -13,9 +13,10 @@ import javax.persistence.criteria.Root;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import it.solvingteam.course.springmvc.springmvcdemo.dto.messages.CustomerDeleteMessageDto;
 import it.solvingteam.course.springmvc.springmvcdemo.dto.messages.CustomerDto;
-import it.solvingteam.course.springmvc.springmvcdemo.dto.messages.CustomersSearchFilterDto;
 import it.solvingteam.course.springmvc.springmvcdemo.dto.messages.CustomerInsertMessageDto;
+import it.solvingteam.course.springmvc.springmvcdemo.dto.messages.CustomersSearchFilterDto;
 import it.solvingteam.course.springmvc.springmvcdemo.mapper.CustomerMapper;
 import it.solvingteam.course.springmvc.springmvcdemo.model.Customer;
 import it.solvingteam.course.springmvc.springmvcdemo.repository.CustomerRepository;
@@ -28,7 +29,7 @@ public class CustomerService {
 
     @Autowired
     private CustomerMapper customerMapper;
-
+    
     @Autowired
     private EntityManager entityManager;
 
@@ -103,11 +104,14 @@ public class CustomerService {
 		 this.customerRepository.save(customer);
 	}
 	
-	public void delete(Integer id) {
-		Customer customer = this.findById(id).orElse(null);
-		 this.customerRepository.delete(customer);
+	public void delete(CustomerDto customerDto) {
+		Customer customer = customerMapper.convertDtoToEntity(customerDto);
+		this.customerRepository.delete(customer);
 	}
     
-	
+	public Customer getCustomerEntityFromCustomerDeleteMessageDto(CustomerDeleteMessageDto customerDeleteMessageDto) {
+		Customer customer = this.findById(Integer.parseInt(customerDeleteMessageDto.getIdCustomerDelete())).orElse(null);
+		return customer;
+	}
 	
 }

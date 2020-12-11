@@ -17,6 +17,7 @@
        
     </form>
 </div>
+
 <table>
     <thead>
     <tr>
@@ -26,6 +27,7 @@
     </tr>
     </thead>
     <tbody>
+    
     <tr th:each="customer : ${customers}" th:object="${customer}">
         <td th:text="*{name}"></td>
         <td th:text="*{address}"></td>
@@ -34,10 +36,15 @@
         <td>
         <a th:href="@{/customer/show/{customerId}(customerId=*{id})}">Visualizza</a>
         <a th:href="@{/customer/update/{customerId}(customerId=*{id})}">Modifica</a>
-        <a th:href="@{/customer/delete/{customerId}(customerId=*{id})}">Elimina</a>
+        <a th:href="@{/customer/delete/{idCustomerDelete}(idCustomerDelete=*{id})}">Elimina</a>
         </td>
     </tr>
     </tbody>
 </table>
+
+ 	<div th:object="${customerDeleteModel}">
+    <p style="color:red" th:if="${#fields.hasErrors('idCustomerDelete')}" th:errors="*{idCustomerDelete}"></p>
+    </div>
+
 </body>
 </html>
