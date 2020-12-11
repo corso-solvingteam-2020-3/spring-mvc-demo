@@ -35,7 +35,7 @@
         
         <td><a th:href="@{/customer/show/{id}(id=${customer.id})}" class="btn btn-info">Show</a>
         <a th:href="@{/customer/update/{id}(id=${customer.id})}" class="btn btn-info">Update</a>
-        <a th:href="@{/customer/delete/{id}(id=${customer.id})}" class="btn btn-info">Delete</a></td>
+        <a th:href="@{/customer/delete/{id}(id=${customer.id})}" class="btn btn-info" th:if="${customer.size == '0'}">Delete</a></td>
 
     </tr>
     <a th:href="@{/}" class="btn btn-secondary mb-3">Back</a>

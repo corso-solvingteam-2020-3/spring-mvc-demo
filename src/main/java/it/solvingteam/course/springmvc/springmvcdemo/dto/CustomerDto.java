@@ -9,6 +9,8 @@ public class CustomerDto {
     private String mobile;
 
     private String address;
+    
+    private String size;
 
     public String getId() {
         return id;
@@ -41,5 +43,13 @@ public class CustomerDto {
     public void setAddress(String address) {
         this.address = address;
     }
+
+	public String getSize() {
+		return size;
+	}
+
+	public void setSize(String size) {
+		this.size = size;
+	}
 
 }
