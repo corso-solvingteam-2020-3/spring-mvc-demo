@@ -1,15 +1,19 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="https://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
     <title>Gestione ordini</title>
+<head th:insert="header.html :: header">
+<meta charset="UTF-8">
 </head>
 <body>
-Welcome in customer/orders
-<p><a th:href="@{/customer/insert}">Create a new Customer</a></p>
-<p><a th:href="@{/delivery/insert}">Create a new Delivery</a></p>
+<div class="container" >
+Welcome
 
-<p><a th:href="@{/customer/}">Customers</a></p>
-<p><a th:href="@{/delivery/}">Deliveries</a></p>
+<p><a th:href="@{/customer/insert}" class="btn btn-primary mb-3">Add Customer</a></p>
+<p><a th:href="@{/customer/}" class="btn btn-secondary mb-3">All Customers</a></p>
+
+<p><a th:href="@{/delivery/insert}" class="btn btn-primary mb-3">Add Delivery</a></p>
+<p><a th:href="@{/delivery/}" class="btn btn-secondary mb-3">All Deliveries</a></p>
+
+</div>
 </body>
 </html>

@@ -1,15 +1,18 @@
 <!DOCTYPE HTML>
-<html lang="en" xmlns:th="https://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
+<html lang="en" xmlns:th="https://www.thymeleaf.org"> 
     <title>Delete Delivery</title>
+    
+<head th:insert="fragments/../header.html :: header">
+	<meta charset="UTF-8">
 </head>
 <body>
+<main class="container">
 <h1>Delete Delivery</h1>
 <form action="#" th:action="@{/delivery/delete/{id}(id=*{id})}" method="post" th:object="${deliveryDeleteModel}">
 
-    <p><input type="submit" value="Delete"/></p>
-    <a th:href="@{/delivery}">Back</a>
+    <p><input type="submit" value="Delete" class="btn btn-primary mb-3"/></p>
+    <a th:href="@{/delivery}" class="btn btn-secondary mb-3">Back</a>
 </form>
+</main>
 </body>
 </html>

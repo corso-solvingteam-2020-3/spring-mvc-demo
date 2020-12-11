@@ -1,17 +1,20 @@
 <!DOCTYPE HTML>
-<html lang="en" xmlns:th="https://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
+<html lang="en" xmlns:th="https://www.thymeleaf.org">  
     <title>Show Delivery</title>
+    
+<head th:insert="fragments/../header.html :: header">
+	<meta charset="UTF-8">
 </head>
 <body>
+<main class="container">
 <h1>Show Delivery</h1>
 <tr>
         Description: <td th:text="${delivery.description}"></td><br>
         Shipping Date: <td th:text="${delivery.shippingDate}"></td> <br>
         Price: <td th:text="${delivery.price}"></td> <br>
         Customer: <td th:text="${customer_name}"></td> <br>
-    <a th:href="@{/delivery}">Back</a>
+    <a th:href="@{/delivery}" class="btn btn-secondary mb-3">Back</a>
 </tr>
+</main>
 </body>
 </html>

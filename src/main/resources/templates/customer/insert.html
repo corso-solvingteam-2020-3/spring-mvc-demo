@@ -1,24 +1,24 @@
 <!DOCTYPE HTML>
 <html lang="en" xmlns:th="https://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
     <title>Insert Customer</title>
+<head th:insert="fragments/../header.html :: header">
+	<meta charset="UTF-8">
 </head>
 <body>
-<h1>Insert Customer</h1>
-<form action="#" th:action="@{/customer/insert}" method="post" th:object="${customerInsertModel}">
+<h1 class="container">Insert Customer</h1>
+<form action="#" th:action="@{/customer/insert}" method="post" th:object="${customerInsertModel}" class="container">
 
-    <p>Name: <input type="text" th:field="*{name}"/></p>
-    <p style="color:red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></p>
+    <p>Name: <input type="text" th:field="*{name}" class="form-control"/></p>
+    <p style="color:red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="container"></p>
 
-    <p>Address: <input type="text" th:field="*{address}"/></p>
-    <p style="color:red" th:if="${#fields.hasErrors('address')}" th:errors="*{address}"></p>
+    <p>Address: <input type="text" th:field="*{address}" class="form-control"/></p>
+    <p style="color:red" th:if="${#fields.hasErrors('address')}" th:errors="*{address}" class="container"></p>
 
-    <p>Mobile: <input type="text" th:field="*{mobile}"/></p>
-    <p style="color:red" th:if="${#fields.hasErrors('mobile')}" th:errors="*{mobile}"></p>
+    <p>Mobile: <input type="text" th:field="*{mobile}" class="form-control"/></p>
+    <p style="color:red" th:if="${#fields.hasErrors('mobile')}" th:errors="*{mobile}" class="container"></p>
 
-    <p><input type="submit" value="Submit"/></p>
-    <a th:href="@{/}">Back</a>
+    <p><input type="submit" value="Submit" class="btn btn-primary mb-3"/></p>
+    <a th:href="@{/}" class="btn btn-secondary mb-3">Back</a>
 </form>
 </body>
 </html>

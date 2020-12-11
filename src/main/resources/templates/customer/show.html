@@ -1,16 +1,19 @@
 <!DOCTYPE HTML>
 <html lang="en" xmlns:th="https://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
     <title>Show Customer</title>
+    
+<head th:insert="fragments/../header.html :: header">
+	<meta charset="UTF-8">
 </head>
 <body>
+<main class="container">
 <h1>Show Customer</h1>
 <tr>
         Name: <td th:text="${customer.name}"></td><br>
         Address: <td th:text="${customer.address}"></td> <br>
         Mobile: <td th:text="${customer.mobile}"></td> <br>
-    <a th:href="@{/customer}">Back</a>
+    <a th:href="@{/customer}" class="btn btn-secondary mb-3">Back</a>
 </tr>
+</main>
 </body>
 </html>

@@ -1,29 +1,31 @@
 <!DOCTYPE HTML>
 <html lang="en" xmlns:th="https://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
     <title>Update Delivery</title>
+<head th:insert="fragments/../header.html :: header">
+	<meta charset="UTF-8">
 </head>
 <body>
+<main class="container">
 <h1>Update Delivery</h1>
 <form action="#" th:action="@{/delivery/update/{id}(id=*{id})}" method="post" th:object="${deliveryUpdateModel}">
 
-    <p>Description: <input type="text" th:field="*{description}"/></p>
+    <p>Description: <input type="text" th:field="*{description}" class="form-control"/></p>
     <p style="color:red" th:if="${#fields.hasErrors('description')}" th:errors="*{description}" value="*{description}"></p>
 
-    <p>Shipping Date: <input type="date" th:field="*{shippingDate}"/></p>
+    <p>Shipping Date: <input type="date" th:field="*{shippingDate}" class="form-control"/></p>
     <p style="color:red" th:if="${#fields.hasErrors('shippingDate')}" th:errors="*{shippingDate}" value="*{shippingDate}"></p>
 
-    <p>Price: <input type="number" th:field="*{price}" step="0.01"/></p>
+    <p>Price: <input type="number" th:field="*{price}" step="0.01" class="form-control"/></p>
     <p style="color:red" th:if="${#fields.hasErrors('price')}" th:errors="*{price}" value="*{price}"></p>
     
-    <p>Customer: <select th:field="*{customerId}">
+    <p>Customer: <select th:field="*{customerId}" class="form-select">
     	<option th:each="customer : ${customers}" th:value="${customer.id}" th:text="${customer.name}" th:selected="${customer.id==deliveryUpdateModel.customerId}"/>
     </select></p>
 	<p style="color:red" th:if="${#fields.hasErrors('customerId')}" th:errors="*{customerId}"></p>
 
-    <p><input type="submit" value="Update"/></p>
-    <a th:href="@{/delivery}">Back</a>
+    <p><input type="submit" value="Update" class="btn btn-primary mb-3"/></p>
+    <a th:href="@{/delivery}" class="btn btn-secondary mb-3">Back</a>
 </form>
+</main>
 </body>
 </html>
