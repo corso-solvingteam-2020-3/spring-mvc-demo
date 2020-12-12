@@ -27,7 +27,7 @@ public class Customer {
 
     private String address;
     
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "customer", orphanRemoval=true)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "customer", orphanRemoval=false)
 	private List<Delivery> deliveries ;
     
     public Integer getId() {

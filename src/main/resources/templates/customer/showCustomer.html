@@ -2,12 +2,20 @@
 <html lang="en" xmlns:th="https://www.thymeleaf.org">
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>visualizza Customer</title>
  <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
+<nav th:include="@{/header.html}"></nav>
+ <link th:href="@{/assets/css/global.css}" rel="stylesheet">
 <body>
-
-  <div class='card-body' th:object = '${customer}'>
+<nav th:include="@{/navbar.html}"></nav>
+<main role="main" class="container">
+		
+		<div class='card'>
+		    <div class='card-header'>
+		        Visualizza Customer
+		    </div>
+			<div class='card-body' th:object = '${customer}'>
 		    
 		    	<dl class="row">
 				  <dt class="col-sm-3 text-right">Name:</dt>
@@ -23,11 +31,10 @@
 				  <dt class="col-sm-3 text-right">Mobile</dt>
 				  <dd class="col-sm-9" th:text="*{mobile}"></dd>
 		    	</dl>
-		    
-		    	
-		    	
-		    	
-		    </div>
 
+		</div>
+</div>
+</main>
+<nav th:include="@{/footer.html}"></nav>
 </body>
 </html>

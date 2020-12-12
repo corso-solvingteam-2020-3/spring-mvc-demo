@@ -16,9 +16,11 @@ import org.springframework.stereotype.Service;
 import it.solvingteam.course.springmvc.springmvcdemo.dto.CustomerDto;
 import it.solvingteam.course.springmvc.springmvcdemo.dto.messages.AddCustomerMessageDTO;
 import it.solvingteam.course.springmvc.springmvcdemo.dto.messages.CustomersSearchFilterDto;
+import it.solvingteam.course.springmvc.springmvcdemo.dto.messages.DeleteCustomerMessageDto;
 import it.solvingteam.course.springmvc.springmvcdemo.exceptions.RoleNotFoundException;
 import it.solvingteam.course.springmvc.springmvcdemo.mapper.CustomerMapper;
 import it.solvingteam.course.springmvc.springmvcdemo.model.Customer;
+import it.solvingteam.course.springmvc.springmvcdemo.model.Delivery;
 import it.solvingteam.course.springmvc.springmvcdemo.repository.CustomerRepository;
 
 @Service
@@ -101,8 +103,14 @@ public class CustomerService {
 	  return customerMapper.convertDtoToEntity(customerDto);
 	}
 	
-	public void deleteCustomer(Integer id) {
+	public Customer getCustomerFromDeleteDto(DeleteCustomerMessageDto deleteCustomerMessageDto) {
+		Customer customer = this.findById(Integer.parseInt(deleteCustomerMessageDto.getIdDelete())).orElse(null);
+		return customer;
+	}
+	
+	public void delete(Integer id) {
 		Customer customer = customerRepository.findById(id).orElse(null);
 		this.customerRepository.delete(customer);
 	}
+	
 }
