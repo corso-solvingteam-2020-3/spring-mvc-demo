@@ -3,33 +3,51 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <th:block th:replace="fragments/commonHead :: commonHead"> </th:block>
 </head>
 <body>
 
-<h1>Show Delivery</h1>
+<div th:replace="fragments/header :: header"></div>
 
-<div th:object="${delivery}">
+<div class="container">
 
-<dl>
-<dt> Description: </dt>
-<dd th:text="*{description}">  </dd> 
-</dl>
-<dl>
-<dt> Price: </dt>
-<dd th:text="*{price}">  </dd>
-</dl>
-<dl>
-<dt> Shipping Date: </dt>
-<dd th:text="*{shippingDate}">  </dd>
-</dl>
-<dl>
-<dt> Customer: </dt>
-<dd th:text="*{customer.name}">  </dd>
-</dl>
+	<div class="page-header">
+	  <h3>Show Delivery</h3>
+	</div>
+	
+		<div class='card'>
+		    <div class='card-header'>
+		        Delivery
+		    </div>
+		    <div class='card-body'>
 
-<a th:href="@{/delivery}"> Back </a>
+				<div th:object="${delivery}">
+				
+				<dl class="row">
+				<dt class="col-sm-3 text-right"> Description: </dt>
+				<dd class="col-sm-9" th:text="*{description}">  </dd> 
+				</dl>
+				<dl class="row">
+				<dt class="col-sm-3 text-right"> Price: </dt>
+				<dd class="col-sm-9" th:text="*{price}">  </dd>
+				</dl>
+				<dl class="row">
+				<dt class="col-sm-3 text-right"> Shipping Date: </dt>
+				<dd class="col-sm-9" th:text="*{shippingDate}">  </dd>
+				</dl>
+				<dl class="row">
+				<dt class="col-sm-3 text-right"> Customer: </dt>
+				<dd class="col-sm-9" th:text="*{customer.name}">  </dd>
+				</dl>
+				
+				<a class='btn btn-outline-secondary' th:href="@{/delivery}"> Back </a>
+				
+				</div>
+			</div>
+		</div>
+			
 
 </div>
+<div th:replace="fragments/footer :: footer"></div>
 </body>
 </html>

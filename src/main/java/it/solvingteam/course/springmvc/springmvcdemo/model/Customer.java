@@ -58,4 +58,13 @@ public class Customer {
     public void setAddress(String address) {
         this.address = address;
     }
+
+	public Set<Delivery> getDelivery() {
+		return delivery;
+	}
+
+	public void setDelivery(Set<Delivery> delivery) {
+		this.delivery = delivery;
+	}
+    
 }

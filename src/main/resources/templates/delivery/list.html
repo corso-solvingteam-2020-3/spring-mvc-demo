@@ -3,32 +3,51 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <th:block th:replace="fragments/commonHead :: commonHead"> </th:block>
 </head>
 <body>
+<div th:replace="fragments/header :: header"></div>
+<div class="container">
 <h1>Dashboard customers</h1>
 <div>
-    <form action="#" th:action="@{/delivery}" th:object="${deliverySearchFilterDto}" method="get">
-        <p>ID: <input th:field="*{id}" type="text"></p>
-        <p>Description: <input th:field="*{description}" type="text"></p>
-        <p>Min Price: <input th:field="*{MinPrice}" type="number"></p>
-        <p>Max Price: <input th:field="*{MaxPrice}" type="number"></p>
-        <p>Shipping Date: <input th:field="*{shippingDate}" type="date"></p>
+    <form class="form-horizontal" action="#" th:action="@{/delivery}" th:object="${deliverySearchFilterDto}" method="get">
+    	<div class="form-row">
+    	<div class="form-group col-md-4">
+        <p>ID: <input class="form-control"  th:field="*{id}" type="text"></p>
+        </div>
+        <div class="form-group col-md-4">
+        <p>Description: <input class="form-control"  th:field="*{description}" type="text"></p>
+        </div>
+        <div class="form-group col-md-4">
+        <p>Min Price: <input class="form-control" th:field="*{MinPrice}" type="number"></p>
+        </div>
+        <div class="form-group col-md-4">
+        <p>Max Price: <input class="form-control"  th:field="*{MaxPrice}" type="number"></p>
+        </div>
+        
+        <div class="form-group col-md-4">
+        <p>Shipping Date: <input class="form-control"  th:field="*{shippingDate}" type="date"></p>
+        </div>
+        <div class="form-group col-md-4">
         <p>Customer: 
-         <select th:field="*{customerId}">
+         <select class="form-control"  th:field="*{customerId}">
          <option value=""> -- </option>
          <option th:each="customer : ${customers}"
                  th:value="${customer.id}"
                  th:utext="${customer.name}"/>
          </select>     
-        <p>
-        <input type="submit" value="Cerca"/>
         </p>
+        </div>
+       <div class="form-group col-md-4">
+        <button type="submit" class="btn btn-success btn-md">Search</button>
+        <a class="btn btn-primary" th:href="@{/delivery/insert}"> Inserisci </a>
+        </div>
+        </div>
     </form>
-     <a th:href="@{/delivery/insert}"> Inserisci </a>
+     
    
 </div>
-<table>
+<table class="table table-striped">
     <thead>
     <tr>
         <th>ID</th>
@@ -47,12 +66,15 @@
         <td th:text="${delivery.shippingDate}"></td>
         <td th:text="${delivery.customerDto.name}"></td>
         <td>
-        <a th:href="@{/delivery/show/{id}(id=${delivery.id})}"> Show </a>
-        <a th:href="@{/delivery/update/{id}(id=${delivery.id})}"> Update </a>
-        <a th:href="@{/delivery/delete/{id}(id=${delivery.id})}"> Delete </a>
+        <a class="btn btn-outline-success" th:href="@{/delivery/show/{id}(id=${delivery.id})}"> Show </a>
+        <a class="btn btn-outline-success" th:href="@{/delivery/update/{id}(id=${delivery.id})}"> Update </a>
+        <a class="btn btn-outline-success" th:href="@{/delivery/delete/{id}(id=${delivery.id})}"> Delete </a>
         </td>
     </tr>
     </tbody>
 </table>
+</div>
+
+
 </body>
 </html>

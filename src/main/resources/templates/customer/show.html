@@ -2,30 +2,45 @@
 <html lang="en" xmlns:th="https://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
-    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <title>Show</title>
+   <th:block th:replace="fragments/commonHead :: commonHead"> </th:block>
 </head>
 <body>
 
-<h1>Show Customer</h1>
+<div th:replace="fragments/header :: header"></div>
 
-<div th:object="${customer}">
+<div class="container">
 
-<dl>
-<dt> Name: </dt>
-<dd th:text="*{name}">  </dd> 
-</dl>
-<dl>
-<dt> Address: </dt>
-<dd th:text="*{address}">  </dd>
-</dl>
-<dl>
-<dt> Mobile: </dt>
-<dd th:text="*{mobile}">  </dd>
-</dl>
+	<div class="page-header">
+	  <h3>Show Customer</h3>
+	</div>
+	
+	<div class='card'>
+		    <div class='card-header'>
+		        Visualizza dettaglio
+		    </div>
+		    <div class='card-body'>
 
-<a th:href="@{/customer}"> Back </a>
-
+			<div th:object="${customer}">
+			
+			<dl class="row">
+			<dt class="col-sm-3 text-right"> Name: </dt>
+			<dd class="col-sm-9" th:text="*{name}"> 
+			</dl>
+			<dl class="row">
+			<dt class="col-sm-3 text-right"> Address: </dt>
+			<dd class="col-sm-9" th:text="*{address}">  </dd>
+			</dl>
+			<dl class="row">
+			<dt class="col-sm-3 text-right"> Mobile: </dt>
+			<dd class="col-sm-9" th:text="*{mobile}">  </dd>
+			</dl>
+			
+			<a class='btn btn-outline-secondary' th:href="@{/customer}"> Back </a>
+		</div>
+	</div>
+	</div>
+<div th:replace="fragments/footer :: footer"></div>
 </div>
 </body>
 </html>

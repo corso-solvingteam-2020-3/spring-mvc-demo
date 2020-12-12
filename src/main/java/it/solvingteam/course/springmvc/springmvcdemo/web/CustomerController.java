@@ -1,10 +1,13 @@
 package it.solvingteam.course.springmvc.springmvcdemo.web;
 
 import it.solvingteam.course.springmvc.springmvcdemo.dto.CustomerDto;
+import it.solvingteam.course.springmvc.springmvcdemo.dto.messages.CustomerDeletionDto;
 import it.solvingteam.course.springmvc.springmvcdemo.dto.messages.CustomerInsertDto;
 import it.solvingteam.course.springmvc.springmvcdemo.dto.messages.CustomersSearchFilterDto;
 import it.solvingteam.course.springmvc.springmvcdemo.model.Customer;
 import it.solvingteam.course.springmvc.springmvcdemo.service.CustomerService;
+import it.solvingteam.course.springmvc.springmvcdemo.web.validators.CustomerDeletionValidator;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,12 +29,17 @@ public class CustomerController {
 
 	@Autowired
 	private CustomerService customerService;
+	
+	@Autowired
+	private CustomerDeletionValidator customerDeletionValidator;
+
 
 	@GetMapping
 	public String list(CustomersSearchFilterDto customersSearchFilterDto, Model model) {
 		List<CustomerDto> allCustomers = customerService.findBySearchParameter(customersSearchFilterDto);
 
 		model.addAttribute("searchFilters", customersSearchFilterDto);
+		model.addAttribute("customerDeletionModel", new CustomerDeletionDto() );
 		model.addAttribute("customers", allCustomers);
 
 		return "customer/list";
@@ -72,11 +80,21 @@ public class CustomerController {
 		return "redirect:/customer/";
 	}
 
-	@GetMapping("delete/{id}")
-	public String delete(@PathVariable Integer id, Model model) {
-		CustomerDto customerDto = customerService.getCustomerById(id);
-		model.addAttribute("customerDto", customerDto);
+	@GetMapping("delete/{idToDelete}")
+	public String delete( @ModelAttribute("searchFilters") CustomersSearchFilterDto customersSearchFilterDto, @Valid @ModelAttribute("customerDeletionModel") CustomerDeletionDto customerDeletionDto, 
+			BindingResult bindingResult, Model model) {
+		customerDeletionValidator.validate(customerDeletionDto, bindingResult);
+		
+		if (bindingResult.hasErrors()) {
+			List<CustomerDto> allCustomers = customerService.findAll();
+			model.addAttribute("customers", allCustomers);
+			 return "customer/list";
+		} else {
+			CustomerDto customerDto = customerService
+					.getCustomerById(Integer.parseInt(customerDeletionDto.getIdToDelete()));
+			model.addAttribute("customerDto", customerDto);
 		return "customer/delete";
+		}
 	}
 
 	@GetMapping("executeDelete/{id}")

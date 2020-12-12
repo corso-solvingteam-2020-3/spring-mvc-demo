@@ -3,20 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <link rel="stylesheet" th:href="@{/css/style.css}">
+     <th:block th:replace="fragments/commonHead :: commonHead"> </th:block>
 </head>
 <body>
+<div th:replace="fragments/header :: header"></div>
 
-<h1>Delete Customer</h1>
+<div class="container">
 
-<div th:object="${deliveryDto}">
-
-<h2 th:text= "|Sei sicuro di voler cancellare l'ordine ${deliveryDto.description} ?|"></h2>
-
-<a th:href="@{/delivery/executeDelete/{id}(id=${deliveryDto.id})}"> Delete </a>
-<br>
-<a th:href="@{/delivery}"> Back </a>
-
-</div>
+	<h3>Delete Customer</h3>
+	<div class='card'>
+	
+		<div th:object="${deliveryDto}">
+			<div class='card-header'>
+				<h5 th:text= "|Sei sicuro di voler cancellare l'ordine ${deliveryDto.description} ?|"></h5>
+			</div>
+			<div class='card-body'>
+			<a class=" btn btn-danger" th:href="@{/delivery/executeDelete/{id}(id=${deliveryDto.id})}"> Delete </a>
+			<a class=" btn btn-success" th:href="@{/delivery}"> Back </a>
+			</div>
+		</div>
+	</div>
+</div>	
+<div th:replace="fragments/footer :: footer"></div>
 </body>
 </html>

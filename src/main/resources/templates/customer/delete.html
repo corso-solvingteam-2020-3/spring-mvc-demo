@@ -3,20 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <link rel="stylesheet" th:href="@{/css/style.css}">
+ <th:block th:replace="fragments/commonHead :: commonHead"> </th:block>
 </head>
 <body>
+<div th:replace="fragments/header :: header"></div>
 
-<h1>Delete Customer</h1>
 
-<div th:object="${customerDto}">
 
-<h2 th:text= "|Sei sicuro di voler cancellare ${customerDto.name} ?|"></h2>
+<div class="container">
+<h3>Delete Customer</h3>
+<div class='card'>
 
-<a th:href="@{/customer/executeDelete/{id}(id=${customerDto.id})}"> Delete </a>
-<br>
-<a th:href="@{/customer}"> Back </a>
-
+	<div th:object="${customerDto}">
+		<div class='card-header'>
+			<h5 th:text= "|Sei sicuro di voler cancellare ${customerDto.name} ?|"></h5>
+		</div>
+		<div class='card-body'>
+		<a class=" btn btn-danger" th:href="@{/customer/executeDelete/{id}(id=${customerDto.id})}"> Delete </a>
+		
+		<a class=" btn btn-success" th:href="@{/customer}"> Back </a>
+		</div>
+	</div>
+</div>
+<div th:replace="fragments/footer :: footer"></div>
 </div>
 </body>
 </html>

@@ -2,25 +2,41 @@
 <html lang="en" xmlns:th="https://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
-    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <title>Dashboard customers</title>
+    <th:block th:replace="fragments/commonHead :: commonHead"> </th:block>
 </head>
 <body>
+<div th:replace="fragments/header :: header"></div>
+<div class="container">
 <h1>Dashboard customers</h1>
 <div>
-    <form action="#" th:action="@{/customer}" th:object="${searchFilters}" method="get">
-        <p>ID: <input th:field="*{id}" type="text"></p>
-        <p>Name: <input th:field="*{name}" type="text"></p>
-        <p>Address: <input th:field="*{address}" type="text"></p>
-        <p>Mobile: <input th:field="*{mobile}" type="text"></p>
-        <p>
-        <input type="submit" value="Cerca"/>
-        </p>
+    <form class="form-horizontal" action="#" th:action="@{/customer}" th:object="${searchFilters}" method="get">
+    <div class="form-row">
+        <div class="form-group col-md-6">
+        <p>ID: <input class="form-control" th:field="*{id}" type="text"></p>
+        </div>
+        <div class="form-group col-md-6">
+        <p>Name: <input class="form-control" th:field="*{name}" type="text"></p>
+        </div>
+        <div class="form-group col-md-6">
+        <p>Address: <input class="form-control" th:field="*{address}" type="text"></p>
+        </div>
+        <div class="form-group col-md-6">
+        <p>Mobile: <input class="form-control" th:field="*{mobile}" type="text"></p>
+        </div>
+        
+        <div class="form-group col-md-6">
+        <button type="submit" class="btn btn-success btn-md">Search</button>
+        <a class="btn btn-primary" th:href="@{/customer/insert}"> Inserisci </a>
+        </div>
+        </div>
     </form>
-     <a th:href="@{/customer/insert}"> Inserisci </a>
    
 </div>
-<table>
+<div class="alert alert-danger alert-dismissible fade show" th:if="${#fields.hasErrors('customerDeletionModel.idToDelete')}" th:errors="${customerDeletionModel.idToDelete}" role="alert">
+			  Errore 
+			</div>
+<table class="table table-striped">
     <thead>
     <tr>
         <th>ID</th>
@@ -37,12 +53,13 @@
         <td th:text="${customer.address}"></td>
         <td th:text="${customer.mobile}"></td>
         <td>
-        <a th:href="@{/customer/show/{id}(id=${customer.id})}"> Show </a>
-        <a th:href="@{/customer/update/{id}(id=${customer.id})}"> Update </a>
-        <a th:href="@{/customer/delete/{id}(id=${customer.id})}"> Delete </a>
+        <a class="btn btn-outline-success" th:href="@{/customer/show/{id}(id=${customer.id})}"> Show </a>
+        <a class="btn btn-outline-success" th:href="@{/customer/update/{id}(id=${customer.id})}"> Update </a>
+        <a  class="btn btn-outline-success" th:href="@{/customer/delete/{idToDelete}(idToDelete=${customer.id})}"> Delete </a>
         </td>
     </tr>
     </tbody>
 </table>
+</div>
 </body>
 </html>

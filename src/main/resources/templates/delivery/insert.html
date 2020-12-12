@@ -2,27 +2,43 @@
 <html lang="en" xmlns:th="https://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
-    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <title>Insert</title>
+    <th:block th:replace="fragments/commonHead :: commonHead"> </th:block>
 </head>
 <body>
-<h1>Insert Delivery</h1>
-    <form action="#" th:action="@{/delivery/executeInsert}" th:object="${deliveryInsertDto}" method="post">
-        <p>Description: <input th:field="*{description}" type="text"></p>
-        <p style="color:red" th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></p>
-        <p>Price: <input th:field="*{price}" type="number" step="0.01"></p>
-        <p style="color:red" th:if="${#fields.hasErrors('price')}" th:errors="*{price}"></p>
-        <p>Shipping Date: <input th:field="*{shippingDate}" type="date"></p>
-        <p style="color:red" th:if="${#fields.hasErrors('shippingDate')}" th:errors="*{shippingDate}"></p>
-        <p>Customer: 
-         <select th:field="*{customerId}" >
-         <option value=""> -- </option>
-         <option th:each="customer : ${customers}"
-                 th:value="${customer.id}"
-                 th:utext="${customer.name}"/>
-         </select>
-         <p style="color:red" th:if="${#fields.hasErrors('customerId')}" th:errors="*{customerId}"></p>     
-        <p>
-        <input type="submit" value="Inserisci"/>
-        </p>
-    </form>
+<div th:replace="fragments/header :: header"></div>
+	<div class="container">
+		<div class="col-sm-4">
+		<h1>Insert Delivery</h1>
+		</div>
+    		<form class="form-horizontal" action="#" th:action="@{/delivery/executeInsert}" th:object="${deliveryInsertDto}" method="post">
+		    	<div class="col-sm-4">
+			        <p>Description: <input class="form-control" th:field="*{description}" type="text"></p>
+			        <p style="color:red" th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></p>
+		        </div>
+		        <div class="col-sm-4">
+			        <p>Price: <input class="form-control"  th:field="*{price}" type="number" step="0.01"></p>
+			        <p style="color:red" th:if="${#fields.hasErrors('price')}" th:errors="*{price}"></p>
+		        </div>
+		        <div class="col-sm-4">
+			        <p>Shipping Date: <input class="form-control" th:field="*{shippingDate}" type="date"></p>
+			        <p style="color:red" th:if="${#fields.hasErrors('shippingDate')}" th:errors="*{shippingDate}"></p>
+		        </div>
+		        <div class="col-sm-4">
+			        <p>Customer: 
+			         <select class="form-control" th:field="*{customerId}" >
+			         <option value=""> -- </option>
+			         <option th:each="customer : ${customers}"
+			                 th:value="${customer.id}"
+			                 th:utext="${customer.name}"/>
+			         </select>
+			         <p style="color:red" th:if="${#fields.hasErrors('customerId')}" th:errors="*{customerId}"></p>     
+		        </div>
+		        <div class="col-sm-4">
+		        	<button type="submit" class="btn btn-success btn-md">Insert</button>
+		        </div>
+    	</form>
+    	</div>
+   <div th:replace="fragments/footer :: footer"></div>
+  </body>
+ </html>
