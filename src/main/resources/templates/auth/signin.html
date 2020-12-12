@@ -2,16 +2,55 @@
 <html lang="en" xmlns:th="https://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <link th:rel="stylesheet" th:href="@{/assets/css/bootstrap.min.css}">
+    <link th:rel="stylesheet" th:href="@{/assets/css/signin.css}" >
     <title>Sign-in</title>
+    
+    <link th:rel="apple-touch-icon" th:href="@{assets/img/favicons/apple-touch-icon.png}" sizes="180x180">
+	<link th:rel="icon" th:href="@{assets/img/favicons/favicon-32x32.png}" sizes="32x32" type="image/png">
+	<link th:rel="icon" th:href="@{assets/img/favicons/favicon-16x16.png}" sizes="16x16" type="image/png">
+	<link th:rel="manifest" th:href="@{assets/img/favicons/manifest.json}">
+	<link th:rel="mask-icon" th:href="@{assets/img/favicons/safari-pinned-tab.svg}">
+	<link th:rel="icon" th:href="@{assets/img/favicons/favicon.ico}">
+	<meta name="msapplication-config" th:href="@{assets/img/favicons/browserconfig.xml}">
+	<meta name="theme-color" content="#563d7c">
+	
+	
+	   <style>
+	    .bd-placeholder-img {
+	      font-size: 1.125rem;
+	      text-anchor: middle;
+	      -webkit-user-select: none;
+	      -moz-user-select: none;
+	      -ms-user-select: none;
+	      user-select: none;
+	    }
+	
+	    @media (min-width: 768px) {
+	      .bd-placeholder-img-lg {
+	        font-size: 3.5rem;
+	      }
+	    }
+	  </style>
+    
+    
 </head>
 <body>
-<h1>Sign-in</h1>
-<form action="#" th:action="@{/auth/signin}" method="post" th:object="${userSigninModel}">
-    <p>Username: <input type="text" th:field="*{username}"/></p>
-    <p>Password: <input type="password" th:field="*{password}"/></p>
-    <p><input type="submit" value="Submit"/></p>
-    <a th:href="@{/auth/signup}">Registrati</a>
+<form action="#" th:action="@{/auth/signin}" method="post" th:object="${userSigninModel}" class="form-signin">
+	
+		<div class="alert alert-danger" th:if="${param.loginError}" role="alert">
+			<p>Errore di login</p>
+		</div>
+
+		<img class="mb-4" th:src="@{/assets/brand/bootstrap-solid.svg}" alt="" width="72" height="72">
+		<h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+		<label for="inputUsername" class="sr-only">Username</label> 
+		<input type="text" id="username" name="username" class="form-control" placeholder="Username" th:field="*{username}" required> 
+		<label for="inputPassword" class="sr-only">Password</label> 
+		<input type="password" id="password" name="password" class="form-control" placeholder="Password" th:field="*{password}" required>
+		<button class="btn btn-lg btn-primary btn-block" type="submit">Login</button>
+		<a class="btn btn-lg btn-primary btn-block" th:href="@{/auth/signup}">SignUp</a>
+
 </form>
-<p style="color: red" th:if="${param.loginError}">Errore di login</p>
 </body>
 </html>

@@ -81,9 +81,16 @@ public class CustomerService {
     	customerRepository.save(customer);
     }
     
-    public void delete(int id) {
-    	Customer customer = customerRepository.findById(id).get();
-    	customerRepository.delete(customer);
+    public boolean delete(int id) {
+    	Customer customer = customerRepository.findByIDWithDeliveries(id).get();
+    	
+    	if(!customer.getDeliveries().isEmpty()) {
+    		return false;
+    	} else {
+    		customerRepository.delete(customer);
+    		return true;
+    	}
+    	
     }
     
 

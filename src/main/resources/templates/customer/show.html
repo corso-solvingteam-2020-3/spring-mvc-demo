@@ -2,17 +2,56 @@
 <html lang="en" xmlns:th="https://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Show Customer</title>
-    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <title>Show Delivery</title>
+    <link th:rel="stylesheet" th:href="@{/assets/css/bootstrap.css}"/>
+    <link th:rel="stylesheet" th:href="@{/assets/css/global.css}" >
 </head>
 <body>
-<h1>Dashboard customers</h1>
-<div>
-        <p>Name: </p><p th:text="${customerToShow.name}"></p>
-        <p>Mobile: </p><p th:text="${customerToShow.mobile}"></p>
-        <p>Address: </p><p th:text="${customerToShow.address}"></p>
-        
-        <p><a th:href="@{/customer/}"><button>Back</button></a></p>
-</div>
+
+		<nav th:include="@{/navbar}">
+		</nav>
+		<header th:include="@{/header}">
+		</header>
+
+		<main role="main" class="container">
+		
+				<div class='card'>
+		    		<div class='card-header'>
+		        		Show Customer
+		   			</div>
+				</div>
+		
+				<div class='card-body'>
+				
+		    		<dl class="row">
+				  		<dt class="col-sm-3 text-right">Name:</dt>
+				  		<dd class="col-sm-9"><p th:text="${customerToShow.name}"/></dd>
+		    		</dl>
+		    	
+		    		<dl class="row">
+				  		<dt class="col-sm-3 text-right">Mobile:</dt>
+				  		<dd class="col-sm-9"><p th:text="${customerToShow.mobile}"/></dd>
+		    		</dl>
+		    	
+		    		<dl class="row">
+				  		<dt class="col-sm-3 text-right">Address:</dt>
+				  		<dd class="col-sm-9"><p th:text="${customerToShow.address}"/></dd>
+		    		</dl>
+		    	
+		    	</div>
+		    
+		    <div class='card-footer'>
+		        <a th:href="@{/customer/}" class='btn btn-outline-secondary' style='width:80px'>
+		            <i class='fa fa-chevron-left'></i> Back
+		        </a>
+		    </div>	
+	
+	
+	
+		<!-- end main container -->	
+		</main>
+		
+		<footer th:include="@{/footer}">
+		</footer>
 </body>
 </html>

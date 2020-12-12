@@ -3,11 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <title>delete Customer</title>
+    <link th:rel="stylesheet" th:href="@{/assets/css/global.css}" >
+    
 </head>
 <body>
 	
-	<p><a th:href="@{/customer/delete/{id}(id=${customerToDelete.id})}"><button>Delete</button></a></p>
-	<p><a th:href="@{/customer/}"><button>Cancel</button></a></p>
+	<header th:include="@{/header}">
+    </header>
+	<nav th:include="@{/navbar}">
+	</nav>
+	
+	<main role="main" class="container">
+	
+		<p><a class="btn btn-primary btn-lg" th:href="@{/customer/delete/{id}(id=${customerToDelete.id})}" role="button">Delete</a></p>
+		<p><a class="btn btn-primary btn-lg" th:href="@{/customer/}" role="button">Cancel</a></p>
+		
+	</main>
 	
 </body>
 </html>

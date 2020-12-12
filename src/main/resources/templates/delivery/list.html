@@ -24,6 +24,8 @@
     </form>
 </div>
  
+ 
+<p style="color:red" th:if="${errorMessage != null}" th:errors="${errorMessage}"></p>
 <table>
     <thead>
     <tr>

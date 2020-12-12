@@ -3,40 +3,104 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link th:rel="stylesheet" th:href="@{/assets/css/bootstrap.css}"/>
+    <link th:rel="stylesheet" th:href="@{/assets/css/global.css}" >
+    
+    
 </head>
 <body>
-<h1>Dashboard customers</h1>
-<div>
-    <form action="#" th:action="@{/customer}" th:object="${searchFilters}" method="get">
-        <p>ID: <input th:field="*{id}" type="text"></p>
-        <p>Name: <input th:field="*{name}" type="text"></p>
-        <p>Address: <input th:field="*{address}" type="text"></p>
-        <p>Mobile: <input th:field="*{mobile}" type="text"></p>
-        <p><input type="submit" value="Cerca"/></p>
-    </form>
-</div>
-<table>
-    <thead>
-    <tr>
-        <th>ID</th>
-        <th>Name</th>
-        <th>Address</th>
-        <th>Mobile</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="customer : ${customers}">
-        <td th:text="${customer.id}"></td>
-        <td th:text="${customer.name}"></td>
-        <td th:text="${customer.address}"></td>
-        <td th:text="${customer.mobile}"></td>
-        <td><a th:href="@{/customer/show/{idToShow}(idToShow=${customer.id},id=${paramSearch.id},name=${paramSearch.name},address=${paramSearch.address},mobile=${paramSearch.mobile})}">Show</a></td>
-        <td><a th:href="@{/customer/prepareEdit/{id}(id=${customer.id})}">Edit</a></td>
-        <td><a th:href="@{/customer/prepareDelete/{id}(id=${customer.id})}">Delete</a></td>
-    </tr>
-    </tbody>
-</table>
-<p><a th:href="@{/customer/insert}">Inserisci Nuovo</a></p>
+	<header th:include="@{/header}">
+    </header>
+	<nav th:include="@{/navbar}">
+	</nav>
+
+	<main role="main" class="container">
+		<div class='card'>
+		    <div class='card-header'>
+		        <h5>Insert Values for Search</h5> 
+		    </div>
+		   	<div class='card-body'>
+				<div>
+					<form name='form' action="#" th:action="@{/customer}" th:object="${searchFilters}" method="get">
+					
+						<div class="form-row">
+							<div class="form-group col-md-6">
+								<label>ID <span class="text-danger">*</span></label>
+								<input th:field="*{id}" type="text" name="id" id="id" class="form-control" placeholder="Insert ID" >
+							</div>
+							
+							<div class="form-group col-md-6">
+								<label>Name <span class="text-danger">*</span></label>
+								<input th:field="*{name}" type="text" name="name" id="name" class="form-control" placeholder="Insert Name" >
+							</div>
+							
+							<div class="form-group col-md-6">
+								<label>Address <span class="text-danger">*</span></label>
+								<input th:field="*{address}" type="text" name="address" id="address" class="form-control" placeholder="Insert Address" >
+							</div>
+							
+							<div class="form-group col-md-6">
+								<label>Mobile <span class="text-danger">*</span></label>
+								<input th:field="*{mobile}" type="text" name="mobile" id="mobile" class="form-control" placeholder="Insert Mobile" >
+							</div>
+							
+						</div>
+						
+							
+						<button type="submit" name="submit" value="submit" id="submit" class="btn btn-primary">Search</button>
+					</form>
+			<!-- end card-body -->			   
+		    </div>
+		</div>	
+	</div>
+	</main>
+	
+	<main role="main" class="container">
+		<div class='card'>
+		    <div class='card-header'>
+		        <h5>Results</h5> 
+		    </div>
+		    <div class='card-body'>
+		 
+		        <div class='table-responsive'>
+		        	<a class="btn btn-primary btn-lg" th:href="@{/customer/insert}" role="button">Add New</a>
+		            <table class='table table-striped ' >
+		                <thead>
+		                    <tr>
+								<th>ID</th>
+        						<th>Name</th>
+        						<th>Address</th>
+        						<th>Mobile</th>
+        						<th>Actions</th>
+							</tr>
+		                </thead>
+		                <tbody>
+		                	
+		                	<tr th:each="customer : ${customers}" >
+
+							<td th:text="${customer.id}"></td>
+							<td th:text="${customer.name}"></td>
+							<td th:text="${customer.address}"></td>
+							<td th:text="${customer.mobile}"></td>
+							<td>
+								<a th:href="@{/customer/show/{idToShow}(idToShow=${customer.id},id=${paramSearch.id},name=${paramSearch.name},address=${paramSearch.address},mobile=${paramSearch.mobile})}">Show </a>
+								<a th:href="@{/customer/prepareEdit/{id}(id=${customer.id})}">Edit </a>
+								<a th:href="@{/customer/prepareDelete/{id}(id=${customer.id})}">Delete </a>
+							</td>
+						</tr>
+		              	
+		                </tbody>
+		                
+		            </table>
+		            
+		        </div>
+		      </div>
+		    </div>
+
+</main>
+<!--  <footer th:include="@{/footer}">
+</footer>-->
+
 </body>
+
 </html>

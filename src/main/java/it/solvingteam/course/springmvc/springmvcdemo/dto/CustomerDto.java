@@ -1,6 +1,10 @@
 package it.solvingteam.course.springmvc.springmvcdemo.dto;
 
+import java.util.Set;
+
 import javax.validation.constraints.NotEmpty;
+
+import it.solvingteam.course.springmvc.springmvcdemo.model.Delivery;
 
 public class CustomerDto {
 
@@ -15,6 +19,8 @@ public class CustomerDto {
     
     @NotEmpty(message = "Required field")
     private String address;
+    
+    private Set<Delivery> deliveries;
 
     public String getId() {
         return id;
@@ -47,5 +53,15 @@ public class CustomerDto {
     public void setAddress(String address) {
         this.address = address;
     }
+
+	public Set<Delivery> getDeliveries() {
+		return deliveries;
+	}
+
+	public void setDeliveries(Set<Delivery> deliveries) {
+		this.deliveries = deliveries;
+	}
+    
+    
 
 }

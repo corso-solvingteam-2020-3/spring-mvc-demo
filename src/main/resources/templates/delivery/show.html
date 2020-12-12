@@ -3,17 +3,60 @@
 <head>
     <meta charset="UTF-8">
     <title>Show Delivery</title>
-    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link th:rel="stylesheet" th:href="@{/assets/css/bootstrap.css}"/>
+    <link th:rel="stylesheet" th:href="@{/assets/css/global.css}" >
 </head>
 <body>
-<h1>Show Delivery</h1>
-<div>
-        <p>Description: </p><p th:text="${deliveryToShow.description}"></p>
-        <p>Shipping Date: </p><p th:text="${deliveryToShow.shippingDate}"></p>
-        <p>Price: </p><p th:text="${deliveryToShow.price}"></p>
-        <p>Customer: </p><p th:text="${deliveryToShow.customer.name}"></p>
-        
-        <p><a th:href="@{/delivery/}"><button>Back</button></a></p>
-</div>
+
+		<nav th:include="@{/navbar}">
+		</nav>
+		<header th:include="@{/header}">
+		</header>
+
+		<main role="main" class="container">
+		
+				<div class='card'>
+		    		<div class='card-header'>
+		        		Show Delivery
+		   			</div>
+				</div>
+		
+				<div class='card-body'>
+				
+		    		<dl class="row">
+				  		<dt class="col-sm-3 text-right">Description:</dt>
+				  		<dd class="col-sm-9"><p th:text="${deliveryToShow.description}"/></dd>
+		    		</dl>
+		    	
+		    		<dl class="row">
+				  		<dt class="col-sm-3 text-right">Shipping Date:</dt>
+				  		<dd class="col-sm-9"><p th:text="${deliveryToShow.shippingDate}"/></dd>
+		    		</dl>
+		    	
+		    		<dl class="row">
+				  		<dt class="col-sm-3 text-right">Price:</dt>
+				  		<dd class="col-sm-9"><p th:text="${deliveryToShow.price}"/></dd>
+		    		</dl>
+		    	
+		    		<dl class="row">
+				  		<dt class="col-sm-3 text-right">Customer:</dt>
+				  		<dd class="col-sm-9"><p th:text="${deliveryToShow.customer.name}"/></dd>
+		    		</dl>
+		    	
+		    	</div>
+		    
+		    <div class='card-footer'>
+		        <a th:href="@{/delivery/}" class='btn btn-outline-secondary' style='width:80px'>
+		            <i class='fa fa-chevron-left'></i> Back
+		        </a>
+		    </div>	
+	
+	
+	
+		<!-- end main container -->	
+		</main>
+		
+		<footer th:include="@{/footer}">
+		</footer>
 </body>
 </html>

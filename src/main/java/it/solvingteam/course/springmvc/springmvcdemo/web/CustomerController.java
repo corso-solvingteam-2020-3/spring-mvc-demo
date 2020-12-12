@@ -126,6 +126,8 @@ public class CustomerController {
     @GetMapping("prepareDelete/{id}")
     public String prepareDelete(@PathVariable Integer id, Model model) {
     	
+    	
+    	
 		CustomerDto customerDaEliminare = new CustomerDto();
 		
 		customerDaEliminare.setId(Integer.toString(id));
@@ -139,9 +141,15 @@ public class CustomerController {
     @GetMapping("delete/{id}")
     public String DeleteCustomer(@PathVariable Integer id, Model model) {
     	
-		customerService.delete(id);
+		boolean result = customerService.delete(id);
 
-		return "redirect:/customer/";
+		if(result) {
+			return "redirect:/customer/";
+		}else {
+			model.addAttribute("errorMessage", "Impossibile eliminare");
+			return "redirect:/customer/";
+		}
+		
     	
     }
 

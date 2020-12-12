@@ -3,21 +3,61 @@
 <head>
     <meta charset="UTF-8">
     <title>Sign-up</title>
+    
+    <meta charset="UTF-8">
+    <link th:rel="stylesheet" th:href="@{/assets/css/bootstrap.min.css}">
+    <link th:rel="stylesheet" th:href="@{/assets/css/signin.css}" >
+    <title>Sign-in</title>
+    
+    <link th:rel="apple-touch-icon" th:href="@{assets/img/favicons/apple-touch-icon.png}" sizes="180x180">
+	<link th:rel="icon" th:href="@{assets/img/favicons/favicon-32x32.png}" sizes="32x32" type="image/png">
+	<link th:rel="icon" th:href="@{assets/img/favicons/favicon-16x16.png}" sizes="16x16" type="image/png">
+	<link th:rel="manifest" th:href="@{assets/img/favicons/manifest.json}">
+	<link th:rel="mask-icon" th:href="@{assets/img/favicons/safari-pinned-tab.svg}">
+	<link th:rel="icon" th:href="@{assets/img/favicons/favicon.ico}">
+	<meta name="msapplication-config" th:href="@{assets/img/favicons/browserconfig.xml}">
+	<meta name="theme-color" content="#563d7c">
+	
+	
+	   <style>
+	    .bd-placeholder-img {
+	      font-size: 1.125rem;
+	      text-anchor: middle;
+	      -webkit-user-select: none;
+	      -moz-user-select: none;
+	      -ms-user-select: none;
+	      user-select: none;
+	    }
+	
+	    @media (min-width: 768px) {
+	      .bd-placeholder-img-lg {
+	        font-size: 3.5rem;
+	      }
+	    }
+	  </style>
+    
+    
 </head>
 <body>
-<h1>Sign-up</h1>
-<form action="#" th:action="@{/auth/signup}" method="post" th:object="${userSignupModel}">
-    <p>Username: <input type="text" th:field="*{username}"/></p>
-    <p style="color:red" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></p>
+<form action="#" th:action="@{/auth/signup}" method="post" th:object="${userSignupModel}" class="form-signin">
 
-    <p>Password: <input type="password" th:field="*{password}"/></p>
-    <p style="color:red" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></p>
-
-    <p>Repeate Password: <input type="password" th:field="*{repeatePassword}"/></p>
-    <p style="color:red" th:if="${#fields.hasErrors('repeatePassword')}" th:errors="*{repeatePassword}"></p>
-
-    <p><input type="submit" value="Submit"/></p>
-    <a th:href="@{/auth/signin}">Login</a>
+	<div class="alert alert-danger" th:if="${#fields.hasErrors('username')}" th:errors="*{username}" role="alert">
+	</div>
+	<div class="alert alert-danger" th:if="${#fields.hasErrors('password')}" th:errors="*{password}" role="alert">
+	</div>
+	<div class="alert alert-danger" th:if="${#fields.hasErrors('repeatePassword')}" th:errors="*{repeatePassword}" role="alert">
+	</div>
+	
+	<h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+	<label for="inputUsername" class="sr-only">Username</label> 
+	<input type="text" id="username" name="username" class="form-control" placeholder="Username" th:field="*{username}" required> 
+	<label for="inputPassword" class="sr-only">Password</label> 
+	<input type="password" id="password" name="password" class="form-control" placeholder="Password" th:field="*{password}" required>
+	<label for="inputRepeatePassword" class="sr-only">Password</label> 
+	<input type="password" id="repeatePassword" name="repeatePassword" class="form-control" placeholder="Password" th:field="*{repeatePassword}" required>
+	<button class="btn btn-lg btn-primary btn-block" type="submit">SignUp</button>
+	<a class="btn btn-lg btn-primary btn-block" th:href="@{/auth/signin}">Login</a>
+	
 </form>
 </body>
 </html>

@@ -5,13 +5,13 @@ import javax.validation.constraints.NotEmpty;
 public class UserSignupMessageDto {
 
 
-    @NotEmpty(message = "Required field")
+    @NotEmpty(message = "Username Required")
     private String username;
 
-    @NotEmpty(message = "Required field")
+    @NotEmpty(message = "Password Required")
     private String password;
 
-    @NotEmpty(message = "Required field")
+//    @NotEmpty(message = "Please Repeat Password")
     private String repeatePassword;
 
     public String getUsername() {
