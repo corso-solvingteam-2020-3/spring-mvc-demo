@@ -103,7 +103,7 @@ public class CustomerController {
 	public String delete(@Valid @ModelAttribute("customerDeleteModel") CustomerDeleteMessageDto customerDeleteMessageDto, BindingResult bindingResult, 
 			Model model, CustomersSearchFilterDto customersSearchFilterDto) {
 		
-		if (customerDeleteMessageDto.getIdCustomerDelete() != null) {
+		if (customerDeleteMessageDto.getIdCustomerDelete() != null && !customerDeleteMessageDto.getIdCustomerDelete().isEmpty()) {
 			customerDeleteMessageValidator.validate(customerDeleteMessageDto, bindingResult);
 		
 			if (bindingResult.hasErrors()) {
