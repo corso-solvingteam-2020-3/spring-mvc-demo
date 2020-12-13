@@ -8,10 +8,10 @@
         <version>2.4.0</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>it.solvingteam.olympics</groupId>
-    <artifactId>Olympics-spring-mvc</artifactId>
+    <groupId>it.solvingteam.course.springmvc</groupId>
+    <artifactId>spring-mvc-demo</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>Olympics-spring-mvc</name>
+    <name>spring-mvc-demo</name>
     <description>Demo project for Spring Boot</description>
 
     <properties>
